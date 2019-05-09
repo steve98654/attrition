@@ -1,0 +1,104 @@
+\documentclass{amsart}[12pt]
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{amssymb, epsfig}
+\usepackage[leqno]{amsmath}
+\usepackage{eurosym}
+\usepackage{listings}
+
+\usepackage{float}
+
+\def\P{\mathbb{P}}
+\def\Q{\mathbb{Q}}
+\def\E{\mathbb{E}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\usepackage[a4paper,margin=3cm]{geometry}
+\usepackage{authblk}
+
+%\title{Bootstrapping Based Asset Allocation}
+%\author{Wolfgang H\"{a}rdle, 
+\title{Notes on GlassDoor Employee Attrition Study}
+%\author{Stephen Taylor, Jan Vecer}
+%\email{steve98654@gmail.com}
+%\author[1]{Stephen Taylor}
+%\author[2]{Jan Vecer}
+%\affil[1]{New Jersey Institute of Technology, Martin Tuchman School of Management,
+%3000 Central Avenue Building (CAB), Newark, New Jersey 07102, USA}
+%\affil[2]{Charles University, Department of Probability and Mathematical Statistics, Sokolovska 83, 18675 Praha 8, Czech Republic}
+%\date{March 4, 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  We ...
+\end{abstract}
+
+\section{Introduction and Overview}
+
+Glassdoor does the following ....  
+
+\section{Ideas to Pursue} 
+
+Here we describe several ideas to pursue as part of this study
+
+\begin{enumerate}
+    \item Let's focus on Leaving a company, not just different role in same company 
+    \item Look at rankings from old company to new one; what can we say overall about 
+         the characteristics of these companies?  What factors did we see the most signi
+         change in? Make scatter plots/hists here 
+    \item What other summary statistics are relevant that go beyond what is already in 
+          the glassdoor article? 
+    \item Do a brief literature review.  What has been done in this area already?
+          Summarize Glassdoor as part of this ... describe the uniqueness of this dataset. 
+          Mention it would be of interest to expand ... mine LinkedIn as well to do a 
+          more thorough study later. 
+    \item Look at people who made a major change (e.g. shifted geographic regions. ... more than 500 miles 
+          away ... is motivation any different for these people?)
+    \item Look at how old vs new ranking variable scatter plots differ from the y=x line, 
+        e.g. if employees change, which variables to we find also change significantly?  
+          Do some change always in the upwards direction? Linear reg. essentially tries 
+          to understand to what extent is this line differs from 1, e.g. if it is 1 for 
+          a given variable, then this variable has no influence ... can we develop a 
+          better variable influence measure here? 
+    \item Look at people who switched industries ... any different motivation here? 
+    \item One interesting feature is that employees seldom seem to stay at a company that has the 
+          same size as their old one.  Lots of shirts from large to small or vice versa.  Perhaps 
+          make this more quantitative? 
+    \item  check if job-len corresponds to start,end date difference 
+    \item Any info associated with geographic studies?  Large vs small cities? 
+    \item  patterns that stem from either age or employment tenure? 
+    \item binary model classifer, ROC curve etc. 
+    \item impl their original regression model ... test 
+    \item  industry specific studies 
+\end{enumerate}
+
+\section{Data Summary} 
+
+
+\section{Variable Selection Model} 
+
+\section{Numerical Studies} 
+
+\section{Conclusions and Extensions} 
+
+
+
+\begin{thebibliography}{100}
+    \bibitem{Sma} Smart, Morgan and Chamberlain, Andrew (2016). Why Do Workers Quit? The Factors 
+        that Predict Employee Turnover. \emph{Glassdoor Research Report Whitepaper}.  
+\end{thebibliography}
+\end{document}
+
