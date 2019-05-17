@@ -1,0 +1,164 @@
+%
+% File hicss51.tex
+%
+% Contact: Holm Smidt, hsmidt@hawaii.edu
+%%
+%%
+%% Based on the style files for ACL 2015 by 
+%% car@ir.hit.edu.cn, gdzhou@suda.edu.cn
+
+
+\documentclass[10pt]{article}
+\input{hicss51-packages.tex}
+\newcommand{\sansserifformat}[1]{\fontfamily{cmss}{ #1}}%
+
+%\setlength\titlebox{5cm}
+
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size).
+
+
+\title{Please Read Carefully Detailed Formatting Guidelines for Preparing Your HICSS Final Paper with Author Names}
+
+\author{First Author \\
+  Affiliation \\
+  {\underline{ email@domain}} \\\And
+  Second Author \\
+  Affiliation \\
+  {\underline{ email@domain} }\\\And 
+  Third Author \\
+  Affiliation \\
+  {\underline{email@domain}} \\}
+
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+The abstract is to be in fully-justified italicized text, at the top of the left-hand column as it is here, below the author information. Use the word “Abstract” as the title, in 12-point Times, boldface type, centered relative to the column, initially capitalized. The abstract is to be in 10-point, single-spaced type, and up to 150 words in length. Leave two blank lines after the abstract, and then begin the main text. 
+
+\end{abstract}
+
+\section{Introduction}
+
+All manuscripts must be in English. {\em Manuscripts must not exceed 10 pages, single-spaced and double-columned}.  This includes all graphs, tables, figures and references. These guidelines include complete descriptions of the fonts, spacing, and related information for producing your proceedings manuscripts. Please follow the steps outlined below preparing your final manuscript. {\em Read the following carefully. The quality of the finished product largely depends upon receiving your cooperation and help at this particular stage of the publication process.}
+
+
+\section{Formatting your paper}
+
+All printed material, including text, illustrations, and charts, must be kept within a print area of 6-1/2 inches (16.51 cm) wide by 8-7/8 inches (22.51 cm) high. Do not write or print anything outside the print area. All text must be in a two-column format. Columns are to be 3 inches (7.85 cm) wide, with a 5.1/16 inch (0.81 cm) space between them. Text must be fully justified. \\
+This formatting guideline provides the margins, placement, and print areas. If you hold it and your printed page up to the light, you can easily check your margins to see if your print area fits within the space allowed.
+
+\section{Main title}
+
+The main title (on the first page) should begin 1-3/8 inches (3.49 cm) from the top edge of the page, centered, and in Times 14-point, boldface type. Capitalize the first letter of nouns, pronouns, verbs, adjectives, and adverbs; do not capitalize articles, coordinate conjunctions, or prepositions (unless the title begins with such a word). Leave two 12-point blank lines after the title.
+
+\section{Author name(s) and affiliation(s) }
+
+Author names and affiliations must be included in the submitted Final Paper for Publication. Leave two 12-point blank lines after the author’s information. 
+
+\section{Second and following pages}
+\label{sect:pdf}
+
+The second and following pages should begin 1.0 inch (2.54 cm) from the top edge. On all pages, the bottom margin should be 1-1/8 inches (2.86 cm) from the bottom edge of the page for 8.5 x 11-inch paper. (Letter-size paper)
+
+\section{Type-style and fonts}
+\label{sec:type-style}
+
+Please note that {\em Times New Roman} is the preferred font for the text of you paper. \textbf{If you must use another font}, the following are considered base fonts.  You are encouraged to limit your font selections to Helvetica, Arial, and Symbol as needed. These fonts are automatically installed with the viewing software. 
+
+\section{Page Numbers}
+
+Please DO NOT include page numbers in your manuscript.
+
+ 
+
+\section{Graphics/Images}
+
+All images must be embedded in your document or included with your submission as individual source files. The type of graphics you include will affect the quality and size of your paper on the electronic document disc. In general, the use of vector graphics such as those produced by most presentation and drawing packages can be used without concern and is encouraged.
+
+\begin{itemize}
+\item Resolution: 600 dpi
+\item Color Images: Bicubic Downsampling at 300dpi
+\item Compression for Color Images: JPEG/Medium Quality
+\item Grayscale Images: Bicubic Downsampling at 300dpi
+\item Compression for Grayscale Images: JPEG/Medium Quality
+\item Monochrome Images: Bicubic Downsampling at 600dpi
+\item Compression for Monochrome Images: CCITT Group 4
+\end{itemize}
+
+If your paper contains many large images they will be down-sampled to reduce their size during the conversion process.  However the automated process used will not always produce the best image, and you are encouraged to perform this yourself on an image by image basis. The use of bitmapped images such as those produced when a photograph is scanned requires significant storage space and must be used with care.
+
+\section{Main text}
+
+Type your main text in 10-point Times, single-spaced. Do not use double-spacing. All paragraphs should be indented 1/4 inch (approximately 0.5 cm).  Be sure your text is fully justified—that is, flush left and flush right. Please do not place any additional blank lines between paragraphs. \\
+\textbf{Figure and table captions} should be 9-point boldface Helvetica (or a similar sans-serif font).  Callouts should be 9-point non-boldface Helvetica. Initially capitalize only the first word of each figure caption and table title. Figures and tables must be numbered separately. For example: ``Figure 1. Database contexts'', ``Table 1. Input data''. Figure captions are to be centered below the figures. Table titles are to be centered above the tables.
+
+% For one-column wide figures use
+\begin{figure}[thb]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+    \centering
+	\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{sample-image}
+	% figure caption is below the figure
+	\caption{Sample figure with caption.}
+	\label{fig: sample-figure}       % Give a unique label
+\end{figure}
+
+\section{First-order headings}
+
+For example, “1. Introduction”, should be Times 12-point boldface, initially capitalized, flush left, with one 12-point blank line before, and one blank line after. Use a period (“.”) after the heading number, not a colon. 
+
+\subsection{Second-order headings}
+ 
+As in this heading, they should be Times 11-point boldface, initially capitalized, flush left, with one blank line before, and one after. 
+
+\subsubsection{Third-order headings. }
+
+Third-order headings, as in this paragraph, are discouraged. However, if you must use them, use 10-point Times, boldface, initially capitalized, flush left, followed by a period and your text on the same line. 
+
+\section{Footnotes}
+
+      Use footnotes sparingly and place them at the bottom of the column on the page on which they are referenced. Use Times New Roman 8-point type, single-spaced. To help your readers, try to avoid using footnotes altogether and include necessary peripheral observations in the text (within parentheses, if you prefer, as in this sentence). 
+
+% Fonts specification --- not shown as it doesn't exist in the Word document either. 
+
+%\section{Fonts}
+
+%A summary of fonts is provided in Table \ref{tab: fonts}. 
+
+%\begin{table}[thb]
+%\centering
+%\caption{\label{font-table} Font guide. \vskip 3pt }
+%\label{tab: fonts}
+%\begin{tabular}{l|rl}
+%\hline \bf Type of Text & \bf Font Size & \bf Style \\ \hline
+%paper title & 14 pt &  \bf bold \\
+%authors & 10 pt &  \underline{email} underlined \\
+%abstract title & 12 pt &  \bf bold\\
+%abstract text & 10 pt &  \it italic\\
+%section titles & 12 pt & \bf bold \\
+%subsection titles & 11 pt & \bf bold \\
+%document text & 10 pt  & \\
+%captions & 9 pt & \sansserifformat{\captionsize sans-serif, \bf bold} \\
+%bibliography & 9 pt & \\
+%footnotes & 8 pt & \\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+\section{References} 
+
+List and number all bibliographical references in 9-point Times, single-spaced, at the end of your paper. When referenced in the text, enclose the citation number in square brackets, for example \cite{Jones2015,Smith2015} and \cite{Smith2015}. Where appropriate, include the name(s) of editors of referenced books.
+
+% if added before the last page, this command can help balancing columns
+%\addtolength{\textheight}{-.2cm} 
+
+%Bibliography 
+\bibliographystyle{ieeetr}
+\bibliography{sample}
+
+
+\end{document}
