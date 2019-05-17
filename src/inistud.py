@@ -12,6 +12,30 @@ font = {'size'   : 22}
 
 plt.rc('font', **font)
 
+def normdata_construct(df):
+    '''
+    '''
+    keepcols1 = ['leftEmployer', 
+                'jobLength_old', # in months
+                'avgSalary',
+                'ratingBusinessOutlook',
+                'ratingCareerOpportunities', 
+                'ratingCeo',
+                'ratingCompensationAndBenefits',
+                'ratingCultureAndValues', 
+                'ratingOverall',
+                'ratingRecommendToFriend',
+                'ratingSeniorManagement', 
+                'ratingWorkLifeBalance']
+
+    tmpdf = df[keepcols1]
+    
+    for col in tmpdf.columns[1:]:
+        tmpdf[col] = [percentileofscore(tmpdf[col],val) for val in tmpdf[col].values ] 
+
+    return df[keepcols1],tmpdf
+
+
 def _varplot(tmpdf,varname): 
     '''
     old vs new variable plot 
@@ -196,7 +220,7 @@ if __name__ == "__main__":
 
     df = df[kpflds] 
 
-    df = df[df.leftEmployer == 1] 
+    #df = df[df.leftEmployer == 1] 
 
     desflds = ['empAgeAtExit', 
                'leftEmployer', 
@@ -253,6 +277,5 @@ if __name__ == "__main__":
         inttrans = industry_trans(df)
         _varplot(df,'employeesTotalNum')
     else:
-
         rating_comp(df)
-        
+        normdata_construct(df)
