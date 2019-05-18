@@ -4,6 +4,7 @@ import numpy as np
 import seaborn as sns
 from scipy.stats.mstats import mquantiles
 from scipy.stats import percentileofscore
+from matplotlib.ticker import StrMethodFormatter
 from collections import Counter
 
 plt.rc('text', usetex=True)
@@ -70,16 +71,45 @@ def old_vs_new(df):
     '''
     Old vs new salary 
     '''
-    dfchg = (df.avgSalary_new - df.avgSalary)
+    dfchg = (df.avgSalary_new - df.avgSalary)/df.avgSalary
+    abchg = (df.avgSalary_new - df.avgSalary)
+
+    df['relsal'] = (df.avgSalary_new - df.avgSalary)/df.avgSalary
+    df['abssal'] = (df.avgSalary_new - df.avgSalary)
+
     print "Max/Min Change"
     print dfchg.min()
     print dfchg.max()
 
-    dfchg = dfchg[(dfchg < 50000.) & (dfchg > -50000.)] 
-    dfchg.hist(bins=100)
-    plt.title('Salary Difference After Leaving')
-    plt.xlabel('Salary Change') 
-    plt.ylabel('Freq. Count')
+    #dfchg = dfchg[(dfchg < 50000.) & (dfchg > -50000.)] 
+
+    print "Per 0 Zeros"
+    dfchgvl = len(dfchg[np.abs(dfchg) < 0.0001])/5550.
+    print dfchgvl
+
+    fig,axes = plt.subplots(1,2)
+
+    dfchg = dfchg[np.abs(dfchg) > 0.0001]
+    abchg = abchg[np.abs(abchg) > 0.0001]
+
+    import ipdb
+    ipdb.set_trace()
+
+    dfchg.hist(bins=100,ax=axes[0])
+    axes[0].set_title('Relative Salary Change')
+    axes[0].set_xlabel('Salary Chg. Factor') 
+    axes[0].set_ylabel('Freq. Count')
+    axes[0].grid(False)
+        
+    (abchg/1000.).hist(bins=100,ax=axes[1])
+    plt.grid(b=None)
+    axes[1].set_title('Absolute Salary Change')
+    axes[1].set_xlabel('Abs. Salary Chg.') 
+    axes[1].grid(False)
+    plt.gca().xaxis.set_major_formatter(StrMethodFormatter('${x:,.0f}$K')) # 2 decimal places
+    #axes[1].set_ylabel('Freq. Count')
+
+    #plt.xlim([-1,4])
 
     plt.show()
 
@@ -105,13 +135,29 @@ def industry_trans(df):
         except:
             pass
 
-    transdf.columns = dispcols
-    transdf.index = dispcols
+    newdiscols = ['Acct',
+                  'Bus Ser',
+                  'Educ',
+                  'Energy',
+                  'Fin',
+                  'Food',
+                  'H Care',
+                  'Inf Tec',
+                  'Ins',
+                  'Manf',
+                  'Media',
+                  'Pharm',
+                  'Retail',
+                  'Tele',
+                  'Travel'] 
+
+    transdf.columns = newdiscols
+    transdf.index = newdiscols
 
     # industry ranking 
     pltdf = np.round(100*(transdf/transdf.sum()))
-    sns.heatmap(pltdf,annot=True,xticklabels=True,yticklabels=True,cbar_kws={'label':'Pct. Persons'})
-    plt.title('Industry Transition Table (from row to column)')
+    sns.heatmap(pltdf,annot=True,xticklabels=True,yticklabels=True,cbar_kws={'label':'Job Transition Percentage','format':'{%.0f\%%}'})
+    plt.title('Industry Transition (from row to column)')
 
     plt.show()
 
@@ -210,6 +256,25 @@ def rating_comp(df):
     tmpdf.columns = new_rating_flds_disp
     tmpdf.hist(bins=30)
 
+
+    ## next vis 
+    tdf1 = df[new_rating_flds]
+    tdf2 = df[rating_flds]
+
+    for col in tdf1.columns:
+        tdf1[col] = [percentileofscore(tdf1[col],val) for val in tdf1[col].values ] 
+    for col in tdf2.columns:
+        tdf2[col] = [percentileofscore(tdf2[col],val) for val in tdf2[col].values ] 
+        
+    tdf1.columns = tdf2.columns 
+    diffdf = tdf1-tdf2
+    diffdf.hist(bins=30)
+
+    plt.show()
+
+    import ipdb
+    ipdb.set_trace()
+
     plt.show()
 
 if __name__ == "__main__":
@@ -272,10 +337,15 @@ if __name__ == "__main__":
                 ]
 
     # Begin studies 
-    if False:
+    if True:
         old_vs_new(df) 
-        inttrans = industry_trans(df)
-        _varplot(df,'employeesTotalNum')
+        #inttrans = industry_trans(df)
+        #_varplot(df,'employeesTotalNum')
+        #rating_comp(df)
+        #normdata_construct(df)
     else:
-        rating_comp(df)
-        normdata_construct(df)
+        inttrans = industry_trans(df)
+
+    ## TODO, QUANTILE NORMALIZE RATINGS COMP
+    ## GOOD GRAPHIC FOR TRANS. 
+    ## ANY INTERESTING VARPLOTS? 

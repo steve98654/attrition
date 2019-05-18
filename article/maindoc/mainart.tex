@@ -274,27 +274,75 @@ In addition note that one can see management ratings tend to be lower overall th
 other related ratings in the left subplot.  In addition, cultural ratings exhibit 
 the greatest dispersion, whereas career ratings are comparatively concentrated.
 The distribution of $[0,1]$ vary considerably.  In particular, the CEO rating distribution 
-is concentrated to the right of the mean largely to a high ocurrances of the maximum rating in 
+is concentrated to the right of the mean largely to a high occurrence of the maximum rating in 
 approximately 9\% of the data.  In contrast, company outlook ratings are right-skewed with 
 a mean below the average score of 0.5.  Both are less dispersed than the friend recommendation 
 rating distribution that also is slightly oriented towards the positive side.
 
-Now we outline ... Feature engineering 
-
-normalize w.r.t. all ratings of sim type, e.g. [0-5] and [0-1]?
-
-\begin{enumerate}
-    \item percentage increase in salary 
-\end{enumerate}
+We now describe several elementary features that we construct from the original data that 
+will be useful in the below exploratory and predictive studies.  In particular, we will 
+consider the percentage salary increase between after a transition has been made. 
+In addition, we will consider quantile normalized absolute changes in each rating 
+category below, e.g. if an employee moved from a 75\%-tile overall rating employer 
+to an 85\%-tile, we will save the 10\%-ile difference as a feature.  We feel these 
+features are partially reflect the thought process of an employee who typically leaves an organization 
+for higher salary and improved company culture based on the relative rather than absolute 
+differences in these variables and thus include them as features.  We finally note that 
+all variables are quantile normalized in our predictive model studies so as not to bias 
+methods considered due to scaling effects.
 
 \section{Exploratory Insights}
 
-Sum. 
+Now we describe a number of findings that were the results of an exploratory analysis of 
+the job transition dataset which go beyond the level of summary statistics.  In particular, 
+DESCRIBE FINDINGS WHEN FINISHED
 
 \subsection{Idea 1}
 
+REV THIS SECTION!!
+
+Salary change 13\% had no salary change. 
+
+In the extreme case, one employee transitioned from a teaching assistant to 
+education Director at Michigan State University and received approximately a 6X 
+salary increase.  In the opposite direction, one employee transitioned from a \$230,000 
+salary as a Managing Director in the Education industry to a Logistics coordinator 
+with a \$43,600 annual salary. 
+
+In addition, we note that this example illustrates the need for considering 
+features such as relative change since the asymmetry of the relative change salary distribution is 
+prominent whereas this is not as clear in the absolute change plot.  
+
+Conditioned on salary change greater than X, how did cult change? 
+
+\begin{figure}[thb]
+    \centering
+    \includegraphics[width=1.0\linewidth]{salgr.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Relative and absolute salary differences post job transition}
+	\label{fig:transmat}
+\end{figure}
+
 
 \subsection{Idea 2}
+
+
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{transmat.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Industry transition table: original firm 
+   industry given in rows and new/same in columns}
+	\label{fig:transmat}
+\end{figure}
+
+
+\subsection{Idea 3}
+
+Nesreen plots ... 
+
+\subsection{Idea 4}
+\subsection{Idea 5}
 
 \section{Towards an Attrition Model}
 
@@ -346,6 +394,7 @@ mention that our extensions will overcome these limitations
 
 \begin{enumerate}
     \item Examine extremes ... 99per sal move? 
+    \item how does salary increase compare with internal vs external transition? 
     \item Old to new industry ... matrix here 
     \item Founding date vs tenure
     \item Let's focus on Leaving a company, not just different role in same company 
