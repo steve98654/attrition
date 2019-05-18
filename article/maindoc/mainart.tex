@@ -151,14 +151,35 @@ only in studies that depend upon this variable below.
 
 \subsection{Summary Statistics, Feature Engineering and Data Normalization}
 
-\begin{enumerate}
-    \item percentage increase in salary 
-\end{enumerate}
+First, several summary statistics are presented in order to outline 
+the main content of the dataset that will be further explored below.
+Next, we discuss our feature construction process to build variables 
+that will be important to latter exploratory studies and predictive 
+model design.  Finally, we describe the quantile normalization process 
+we use in order to ensure all variables are on the same scale prior 
+to being input into the predictive models.
 
+Of the 5550 total employee job transitions in this dataset, 
+a total of 1429 employees remained at their present firm whereas a majority of 4121 
+transitioned to a new firm.  This confirms a claim \cite{Smart2016} indicating 
+that approximately three quarters of employees leave their employer during a job 
+transition.  We now graphically summarize several distributional aspects of 
+attributes associated with these transitions.
 
-A total of 1429 employees remained at their present firm whereas 4121 
-transitioned to a new firm.
-
+Compensation, benefits, and other forms of financial remuneration are typically play 
+a critical role in an employee's job selection process.  In fact, an offer to 
+substantially increase one's salary is a common impetus for a job transition. 
+In the left subplot of Figure \ref{fig:avgsal}, we plot the average 
+annual salary distribution 
+of the employer during their tenure at their original employer over our full dataset.  
+Salaries ranged from \$15,140 to \$240,000 per year.  We note that this sample 
+is slightly overweight in terms of the representation of low-wage workers 
+in comparison with national income distributions [CITE]. In addition, 
+approximately 9\% of workers have salaries greater than \$100,000, which further 
+indicates a slight low-wage bias with respect to the entire US workforce population. 
+However, we note the generate shape of this distribution does indeed closely approximate 
+that of the full workforce [CITE].
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{avgsal.pdf}
@@ -166,7 +187,17 @@ transitioned to a new firm.
 	\caption{Employee average salary and tenure distribution at Original employer}
 	\label{fig:avgsal}
 \end{figure}
+%
+In the right subplot of Figure \ref{fig:avgsal}, we display the tenure of each 
+employee at their original employer prior to a job transition which is similar to
+summary information presented in \cite{Smart2016}. Note that overall these tenures 
+are relatively short and the distribution exhibits concentrated counts near end of year 
+times when performance reviews typically take place.  
 
+Next, in table \ref{tab:indtab}, we count the industry of the original employer 
+of all job transitions being considered and display all such industries exceeding 
+50 such transitions.
+%
 \begin{table}
   \rowcolors{2}{gray!25}{white}
   \centering
@@ -186,8 +217,19 @@ transitioned to a new firm.
   \end{tabular}
 Original employer sector counts for industries with more than 50 job transitions.
 \end{table}
+%
+Note that the Retail and Education industries are overrepresented which 
+provides a further indication as to why lower salaries are also above those of the 
+national distribution. In addition, we have sufficient data to study employee industry 
+transition patters for many of the industries listed in this table which 
+we explore in more detail in the subsequent section.
 
-
+In Figure \ref{fig:emplstat}, we display two additional histograms related to original 
+employer specific information.  In the left subplot, we present the distribution of the 
+original firm's founding date.  This histogram was left truncated to begin at 1750 with a minimum 
+founding date of 1625 for the City of New York.  Typically, firms with earlier founding 
+dates are municipalities or governmental organizations. 
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{emplstat.pdf}
@@ -195,20 +237,52 @@ Original employer sector counts for industries with more than 50 job transitions
 	\caption{Original employer founding year and employee number distributions}
 	\label{fig:emplstat}
 \end{figure}
+%
+Note that we have an effective samplings of older and modern firms with a 
+median founding date of 1962.  In addition, we consider relatively few 
+firms that were founded within the past twenty years in this sample as 
+indicated by the height of the final bar of the histogram.   Next, in 
+the right subplot of Figure \ref{fig:emplstat}, we display the log-histogram 
+of the number of employees at each original firm being considered. The majority 
+of employees work at larger firms which employ between ten thousand and one million 
+people.  In particular, only a small fraction of employees work at small 
+firms with fewer than one hundred colleagues.  Finally, the largest employer 
+is Walmart with approximately 2.2 million employees.
 
-
+Next, in Figure \ref{fig:vioplt}, we display original employer violin plots of ratings data in nine 
+categories which includes career opportunities, compensation and benefits, company culture, 
+overall rating, senior management, work-life balance, outlook, CEO, and friend recommendation 
+ratings.  Here mean values are depicted by white circles in each form whereas standard deviations 
+about either side of the mean are displayed by centered black bars.  The general shape of 
+each violin is determined by a symmetric display of a kernel density estimate of the 
+probability distribution of each rating variable.
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{vioplt.pdf}
     %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
-	\caption{Violin Plots ... }
+	\caption{Violin plots of original employer ratings information sourced from Glassdoor reviews }
 	\label{fig:vioplt}
 \end{figure}
+%
+Ratings with values in the $[0,5]$ range are plotted in the left subplot and those between 
+$[0,1]$ range are plotted in the right.  We note that no actual ratings fall outside these 
+bounds; the slight graphical extensions beyond these boundaries in the plot are due to 
+artifacts of the kernel density estimation procedure required to 
+produce the visualization and not representative of the true data. 
+In addition note that one can see management ratings tend to be lower overall than 
+other related ratings in the left subplot.  In addition, cultural ratings exhibit 
+the greatest dispersion, whereas career ratings are comparatively concentrated.
+The distribution of $[0,1]$ vary considerably.  In particular, the CEO rating distribution 
+is concentrated to the right of the mean largely to a high ocurrances of the maximum rating in 
+approximately 9\% of the data.  In contrast, company outlook ratings are right-skewed with 
+a mean below the average score of 0.5.  Both are less dispersed than the friend recommendation 
+rating distribution that also is slightly oriented towards the positive side.
 
+Now we outline ... Feature engineering 
 
-Quantile normalization ... others 
+normalize w.r.t. all ratings of sim type, e.g. [0-5] and [0-1]?
 
-Feature engineering 
 \begin{enumerate}
     \item percentage increase in salary 
 \end{enumerate}
@@ -271,7 +345,9 @@ mention that our extensions will overcome these limitations
 \bibliography{sample}
 
 \begin{enumerate}
+    \item Examine extremes ... 99per sal move? 
     \item Old to new industry ... matrix here 
+    \item Founding date vs tenure
     \item Let's focus on Leaving a company, not just different role in same company 
     \item Look at rankings from old company to new one; what can we say overall about 
          the characteristics of these companies?  What factors did we see the most signi
