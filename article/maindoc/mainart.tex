@@ -9,6 +9,9 @@
 
 
 \documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[table]{xcolor} 
 \input{hicss51-packages.tex}
 \newcommand{\sansserifformat}[1]{\fontfamily{cmss}{ #1}}%
 
@@ -141,6 +144,10 @@ business outlook, career opportunities, compensation and benefits, culture and v
 worklife balance, and senior management. 
 We note that in the event the employee transitioned to a new firm, when applicable,
 the above information specific to both the original and new employer is present in this dataset. 
+Finally, this dataset if fully populated with the exception of missing values in 
+approximate 6\% of the original and new employer founding year values, respectively;
+such null values are disregarded 
+only in studies that depend upon this variable below.
 
 \subsection{Summary Statistics, Feature Engineering and Data Normalization}
 
@@ -148,7 +155,63 @@ the above information specific to both the original and new employer is present 
     \item percentage increase in salary 
 \end{enumerate}
 
+
+A total of 1429 employees remained at their present firm whereas 4121 
+transitioned to a new firm.
+
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{avgsal.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Employee average salary and tenure distribution at Original employer}
+	\label{fig:avgsal}
+\end{figure}
+
+\begin{table}
+  \rowcolors{2}{gray!25}{white}
+  \centering
+  \caption{Transition Counts Per Industry}
+  \begin{tabular}{cccc}
+    \rowcolor{gray!50}
+      Industry & Cnt. & Industry & Cnt. \\
+      Retail & 1357 & Manufact. & 191\\
+      Education & 766 & Insurance & 144\\
+      Info. Tech. & 718 & Media & 113\\
+      Finance & 590 & Acct. \& Legal & 101\\
+      Bus. Services & 369 & Energy & 92\\
+      Food Services & 275  & Travel & 70\\
+      Telecom & 248 & Biotech & 62\\
+      Health Care & 208 & Transportation & 58\\
+	\label{tab:indtab}
+  \end{tabular}
+Original employer sector counts for industries with more than 50 job transitions.
+\end{table}
+
+
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{emplstat.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Original employer founding year and employee number distributions}
+	\label{fig:emplstat}
+\end{figure}
+
+
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{vioplt.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Violin Plots ... }
+	\label{fig:vioplt}
+\end{figure}
+
+
 Quantile normalization ... others 
+
+Feature engineering 
+\begin{enumerate}
+    \item percentage increase in salary 
+\end{enumerate}
 
 \section{Exploratory Insights}
 
@@ -181,7 +244,8 @@ Here we describe several ideas to pursue as part of this study
 Mention limitations here (same as in glassdoor article and others that we find) ... then 
 mention that our extensions will overcome these limitations 
 
--- company specific analytics 
+-- company specific analytics
+-- competative analysis
 -- linkedin, full glassdoor dataset 
 -- outlier determination may serve as a glassdoor fake review filter 
 
