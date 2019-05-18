@@ -87,121 +87,97 @@ we conduct a quantitative data analysis of employee attrition motivations as wel
 predictive models that will enable human resources staff identify employees whose firm separation 
 may be imminent.
 
-We extend the work of \cite{glass} who examine employee attrition and retention issues based upon 
+We extend the work of \cite{Smart2016} who examine employee attrition and retention issues based upon 
 a collection of approximately five thousand anonymously submitted resumes to Glassdoor.  We provide 
 SUMMARY OF DATA ANLAYSIS EXTENSIONS.  In addition, SUMMARY OF NEW MODELS. Lastly, we delineate 
 future data acquisition, analysis and model development extensions that we seek to investigate 
 in future work. 
 
-This article is organized as follows 
+This article is organized as follows ... TYPE WHEN FINISHED 
 
-\section{Formatting your paper}
+\section{Data Description and Feature Engineering}
 
-All printed material, including text, illustrations, and charts, must be kept within a print area of 6-1/2 inches (16.51 cm) wide by 8-7/8 inches (22.51 cm) high. Do not write or print anything outside the print area. All text must be in a two-column format. Columns are to be 3 inches (7.85 cm) wide, with a 5.1/16 inch (0.81 cm) space between them. Text must be fully justified. \\
-This formatting guideline provides the margins, placement, and print areas. If you hold it and your printed page up to the light, you can easily check your margins to see if your print area fits within the space allowed.
+We first turn to describing the content extracted from a collection of 
+employee resumes that will form the basis for the subsequent attrition studies. 
+Next, we provide a variety of summary statistics of this information that 
+are relevant for the design of latter predictive models.  Then we discuss 
+our data normalization process and 
+several features constructed from this original data which will be utilized 
+as input into these models.
+In addition, we outline limitations of this dataset and ideas for improvement  
+in future work.
 
-\section{Main title}
+\subsection{Data Source Description}
 
-The main title (on the first page) should begin 1-3/8 inches (3.49 cm) from the top edge of the page, centered, and in Times 14-point, boldface type. Capitalize the first letter of nouns, pronouns, verbs, adjectives, and adverbs; do not capitalize articles, coordinate conjunctions, or prepositions (unless the title begins with such a word). Leave two 12-point blank lines after the title.
+We worked in conjunction with the authors of \cite{Smart2016} to obtain 
+a collection of 5550 examples of employee job transitions between 
+2007 and 2016 which were sourced from an extensive proprietary database of 
+resumes shared anonymously though Glassdoor's platform.  A job transition 
+is define to be any instance of an employee listing a new role on their 
+resume which may be associated with the present or original or a new employer
+designated as internal and external moves.  Internal moves are typically 
+significant in the sense of the employee either changing roles or 
+being promoted within an organization as opposed to being reassigned 
+within a current team. External moves are of interest for our 
+attrition studies as in this situation employees leave their original 
+firm entirely.
+We summarize several salient features of the dataset construction process 
+and expound upon details relevant to model development below; we refer the
+reader to \cite{Smart2016} for a complete description of the data source. 
 
-\section{Author name(s) and affiliation(s) }
 
-Author names and affiliations must be included in the submitted Final Paper for Publication. Leave two 12-point blank lines after the author’s information. 
 
-\section{Second and following pages}
-\label{sect:pdf}
 
-The second and following pages should begin 1.0 inch (2.54 cm) from the top edge. On all pages, the bottom margin should be 1-1/8 inches (2.86 cm) from the bottom edge of the page for 8.5 x 11-inch paper. (Letter-size paper)
+\subsection{Summary Statistics and Feature Engineering}
 
-\section{Type-style and fonts}
-\label{sec:type-style}
+\section{Exploratory Insights}
 
-Please note that {\em Times New Roman} is the preferred font for the text of you paper. \textbf{If you must use another font}, the following are considered base fonts.  You are encouraged to limit your font selections to Helvetica, Arial, and Symbol as needed. These fonts are automatically installed with the viewing software. 
+Sum. 
 
-\section{Page Numbers}
+\subsection{Idea 1}
 
-Please DO NOT include page numbers in your manuscript.
 
- 
+\subsection{Idea 2}
 
-\section{Graphics/Images}
+\section{Towards an Attrition Model}
 
-All images must be embedded in your document or included with your submission as individual source files. The type of graphics you include will affect the quality and size of your paper on the electronic document disc. In general, the use of vector graphics such as those produced by most presentation and drawing packages can be used without concern and is encouraged.
+adf
 
-\begin{itemize}
-\item Resolution: 600 dpi
-\item Color Images: Bicubic Downsampling at 300dpi
-\item Compression for Color Images: JPEG/Medium Quality
-\item Grayscale Images: Bicubic Downsampling at 300dpi
-\item Compression for Grayscale Images: JPEG/Medium Quality
-\item Monochrome Images: Bicubic Downsampling at 600dpi
-\item Compression for Monochrome Images: CCITT Group 4
-\end{itemize}
+\subsection{Linear Review}
 
-If your paper contains many large images they will be down-sampled to reduce their size during the conversion process.  However the automated process used will not always produce the best image, and you are encouraged to perform this yourself on an image by image basis. The use of bitmapped images such as those produced when a photograph is scanned requires significant storage space and must be used with care.
 
-\section{Main text}
+\subsection{Logistic Work}
 
-Type your main text in 10-point Times, single-spaced. Do not use double-spacing. All paragraphs should be indented 1/4 inch (approximately 0.5 cm).  Be sure your text is fully justified—that is, flush left and flush right. Please do not place any additional blank lines between paragraphs. \\
-\textbf{Figure and table captions} should be 9-point boldface Helvetica (or a similar sans-serif font).  Callouts should be 9-point non-boldface Helvetica. Initially capitalize only the first word of each figure caption and table title. Figures and tables must be numbered separately. For example: ``Figure 1. Database contexts'', ``Table 1. Input data''. Figure captions are to be centered below the figures. Table titles are to be centered above the tables.
+
+\subsection{Binary Classifier}
+
+\subsection{Model Performance Comparison}
+
+\section{Conclusions and Extensions}
+
+
+Here we describe several ideas to pursue as part of this study
+
+Mention limitations here (same as in glassdoor article and others that we find) ... then 
+mention that our extensions will overcome these limitations 
+
+-- company specific analytics 
+-- linkedin, full glassdoor dataset 
+-- outlier determination may serve as a glassdoor fake review filter 
+
 
 % For one-column wide figures use
-\begin{figure}[thb]
+%\begin{figure}[thb]
 	% Use the relevant command to insert your figure file.
 	% For example, with the graphicx package use
-    \centering
-	\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{sample-image}
+%    \centering
+%	\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{sample-image}
 	% figure caption is below the figure
-	\caption{Sample figure with caption.}
-	\label{fig: sample-figure}       % Give a unique label
-\end{figure}
+%	\caption{Sample figure with caption.}
+%	\label{fig: sample-figure}       % Give a unique label
+%\end{figure}
 
-\section{First-order headings}
-
-For example, “1. Introduction”, should be Times 12-point boldface, initially capitalized, flush left, with one 12-point blank line before, and one blank line after. Use a period (“.”) after the heading number, not a colon. 
-
-\subsection{Second-order headings}
- 
-As in this heading, they should be Times 11-point boldface, initially capitalized, flush left, with one blank line before, and one after. 
-
-\subsubsection{Third-order headings. }
-
-Third-order headings, as in this paragraph, are discouraged. However, if you must use them, use 10-point Times, boldface, initially capitalized, flush left, followed by a period and your text on the same line. 
-
-\section{Footnotes}
-
-      Use footnotes sparingly and place them at the bottom of the column on the page on which they are referenced. Use Times New Roman 8-point type, single-spaced. To help your readers, try to avoid using footnotes altogether and include necessary peripheral observations in the text (within parentheses, if you prefer, as in this sentence). 
-
-% Fonts specification --- not shown as it doesn't exist in the Word document either. 
-
-%\section{Fonts}
-
-%A summary of fonts is provided in Table \ref{tab: fonts}. 
-
-%\begin{table}[thb]
-%\centering
-%\caption{\label{font-table} Font guide. \vskip 3pt }
-%\label{tab: fonts}
-%\begin{tabular}{l|rl}
-%\hline \bf Type of Text & \bf Font Size & \bf Style \\ \hline
-%paper title & 14 pt &  \bf bold \\
-%authors & 10 pt &  \underline{email} underlined \\
-%abstract title & 12 pt &  \bf bold\\
-%abstract text & 10 pt &  \it italic\\
-%section titles & 12 pt & \bf bold \\
-%subsection titles & 11 pt & \bf bold \\
-%document text & 10 pt  & \\
-%captions & 9 pt & \sansserifformat{\captionsize sans-serif, \bf bold} \\
-%bibliography & 9 pt & \\
-%footnotes & 8 pt & \\
-%\hline
-%\end{tabular}
-%\end{table}
-
-
-\section{References} 
-
-List and number all bibliographical references in 9-point Times, single-spaced, at the end of your paper. When referenced in the text, enclose the citation number in square brackets, for example \cite{Jones2015,Smith2015} and \cite{Smith2015}. Where appropriate, include the name(s) of editors of referenced books.
+\textbf{Acknowledgements:} The authors would like to ack... for sharing data FINISH WHEN DONE
 
 % if added before the last page, this command can help balancing columns
 %\addtolength{\textheight}{-.2cm} 
