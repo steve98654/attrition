@@ -36,8 +36,36 @@ def normdata_construct(df):
 
     return df[keepcols1],tmpdf
 
+def _distcomp(raw_df,col):
+    '''
+    '''
+    attrition_yes= raw_df[raw_df['leftEmployer']==1]
+    attritio_no = raw_df[raw_df['leftEmployer']==0]
 
-def _varplot(tmpdf,varname): 
+    sns.kdeplot(attrition_yes[col], label="Left" ,shade=True, color="r")
+    sns.kdeplot(attritio_no[col], label="Stayed" ,shade=True,color="g")
+    plt.xlabel(col)
+    plt.title('Attrition Vs. Rating TOP Management')
+
+
+def _dstmk():
+    plt.figure()
+    plt.subplot(1,2,1)
+    _distcomp(df,df.columns[15])
+    plt.xlabel('Friend Rating')
+    plt.title('Friend Rec. Distributions')
+    plt.subplot(1,2,2)
+    _distcomp(df,df.columns[20])
+    plt.xlabel('Worklife Rating')
+    plt.title('Friend Rating Distributions')
+    plt.title('Worklife Distributions')
+
+    plt.show()
+
+
+# 13, 15 , 19, 20   
+
+def _varplot(tmpdf,varname,iflog=False): 
     '''
     old vs new variable plot 
     '''
@@ -46,7 +74,10 @@ def _varplot(tmpdf,varname):
     v1 = tmpdf[varname]
     v2 = tmpdf[newvarname]
 
-    plt.plot(v1,v2,'bx')
+    if iflog:
+        plt.plot(np.log10(v1),np.log10(v2),'bx')
+    else:
+        plt.plot(v1,v2,'bx')
     plt.xlabel('old')
     plt.ylabel('new')
     plt.title(varname)
