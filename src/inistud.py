@@ -6,6 +6,7 @@ from scipy.stats.mstats import mquantiles
 from scipy.stats import percentileofscore
 from matplotlib.ticker import StrMethodFormatter
 from collections import Counter
+from numpy.linalg import eig
 
 plt.rc('text', usetex=True)
 
@@ -61,6 +62,47 @@ def _dstmk():
     plt.title('Worklife Distributions')
 
     plt.show()
+
+def ratingPCA():  
+
+    rting = ['ratingBusinessOutlook',
+             'ratingCareerOpportunities', 
+             'ratingCeo',
+             'ratingCompensationAndBenefits',
+             'ratingCultureAndValues', 
+             'ratingOverall',
+             'ratingRecommendToFriend',
+             'ratingSeniorManagement', 
+             'ratingWorkLifeBalance']
+
+
+    disp_flds = ['Outlook','Oppor','CEO','Comp','Culture','Overall','Friend','Mgmt','Life']
+
+    tmpdf = df.copy()[rting]
+
+    for col in tmpdf.columns:
+        tmpdf[col] = [percentileofscore(tmpdf[col],val)/100. for val in tmpdf[col].values ] 
+
+    tmpdf.columns = disp_flds
+    covmat = tmpdf.cov()
+
+    ev,evc = eig(covmat)
+
+
+    plt.figure()
+    plt.subplot(1,2,1)
+    sns.heatmap(tmpdf.corr(),annot=True,xticklabels=True,yticklabels=True,cbar_kws={'label':'Correlation','format':'{%.1f\%%}'})
+
+    plt.title('Rating Corr. Matrix')
+    plt.subplot(1,2,2)
+    pltsrs = ev.cumsum()/ev.sum()
+
+    sns.tsplot(pltsrs,range(1,len(ev)+1))
+    plt.title('Cum. Var. Explained')
+    plt.xlabel('Numbers of PCs')
+
+    import ipdb
+    ipdb.set_trace()
 
 
 # 13, 15 , 19, 20   
@@ -123,12 +165,9 @@ def old_vs_new(df):
     dfchg = dfchg[np.abs(dfchg) > 0.0001]
     abchg = abchg[np.abs(abchg) > 0.0001]
 
-    import ipdb
-    ipdb.set_trace()
-
     dfchg.hist(bins=100,ax=axes[0])
     axes[0].set_title('Relative Salary Change')
-    axes[0].set_xlabel('Salary Chg. Factor') 
+    axes[0].set_xlabel('Salary Pct. Chg.') 
     axes[0].set_ylabel('Freq. Count')
     axes[0].grid(False)
         
@@ -143,6 +182,9 @@ def old_vs_new(df):
     #plt.xlim([-1,4])
 
     plt.show()
+
+    import ipdb
+    ipdb.set_trace()
 
 def industry_trans(df): 
     '''
@@ -370,6 +412,7 @@ if __name__ == "__main__":
     # Begin studies 
     if True:
         old_vs_new(df) 
+        #ratingPCA()
         #inttrans = industry_trans(df)
         #_varplot(df,'employeesTotalNum')
         #rating_comp(df)

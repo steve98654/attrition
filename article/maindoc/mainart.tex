@@ -297,11 +297,29 @@ Now we describe a number of findings that were the results of an exploratory ana
 the job transition dataset which go beyond the level of summary statistics.  In particular, 
 DESCRIBE FINDINGS WHEN FINISHED
 
-\subsection{Idea 1}
-
-REV THIS SECTION!!
-
-Salary change 13\% had no salary change. 
+\subsection{Transition Salary Changes}
+An opportunity to earn a greater salary is often described as a primary motivation 
+for a job transition.  We seek to investigate this from a quantitative perspective 
+on our attrition dataset.  We first note that approximately 
+13\% of transitions occurred without a change in salary. 
+In Table \ref{fig:salgr}, we display relative (percentage increase/decrease) and  
+absolute salary changes. 
+%
+\begin{figure}[thb]
+    \centering
+    \includegraphics[width=1.0\linewidth]{salgr.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Relative and absolute salary differences after a job transition}
+	\label{fig:salgr}
+\end{figure}
+%
+First note that this example illustrates the need for considering 
+features such as relative change since the asymmetry of the relative change salary distribution is 
+prominent whereas this is not as clear in the absolute change plot.  
+Second, note that there is a wide range of magnitudes of relative salary changes.  In particular, 
+approximately 5\% of employees received a salary increase of more than 150\%.  In 
+addition, 36\% took a reduction in salary as a part of their transition.  However, the remainder 
+received a salary increase which was in many cases quite substantial. 
 
 In the extreme case, one employee transitioned from a teaching assistant to 
 education Director at Michigan State University and received approximately a 6X 
@@ -309,33 +327,33 @@ salary increase.  In the opposite direction, one employee transitioned from a \$
 salary as a Managing Director in the Education industry to a Logistics coordinator 
 with a \$43,600 annual salary. 
 
-In addition, we note that this example illustrates the need for considering 
-features such as relative change since the asymmetry of the relative change salary distribution is 
-prominent whereas this is not as clear in the absolute change plot.  
+\subsection{Industry Transition Patterns}
 
-Conditioned on salary change greater than X, how did cult change? 
-
-\begin{figure}[thb]
-    \centering
-    \includegraphics[width=1.0\linewidth]{salgr.pdf}
-    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
-	\caption{Relative and absolute salary differences post job transition}
-	\label{fig:transmat}
-\end{figure}
-
-
-\subsection{Idea 2}
-
-
+Next, we examine how employers either choose to move to a new industry or remain
+in that of their origination firm as a consequence of their job transition.  
+In Figure \ref{fig:transmat}, we display a heatmap of the percentage of 
+employees that started in an industry indicated by the left row labels and 
+transitioned into the industry on the lower column label. 
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{transmat.pdf}
     %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
-	\caption{Industry transition table: original firm 
-   industry given in rows and new/same in columns}
+	\caption{Industry transition percentage: original firm 
+   industry given in columns and new/same in rows}
 	\label{fig:transmat}
 \end{figure}
-
+%
+Note that both the energy and retail industries tend to retain a considerably 
+greater portion of their employees than the others.  An interesting example 
+along these lines is the Pharmaceutical industry of which 46\% of employees 
+transition to the retail industry while only 42\% remain; this is the only industry 
+that exhibits that feature.  Moreover, the information technology industry has 
+the lowest retention rate with more than half of transitions out of this industry 
+going to the financial, health care, retail, and education sectors.  This is understandable 
+due to the skill requirements prevalence of IT positions across all these industries.  
+Finally, we note that the retail industry is the most popular industry to transition 
+into overall from a distinct original sector.
 
 \subsection{Idea 3}
 
@@ -346,15 +364,31 @@ Conditioned on salary change greater than X, how did cult change?
     %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
 	\caption{Friend recommendation and worklife rating distribution for internal 
     and external transitions}
-	\label{fig:transmat}
+	\label{fig:discdist}
 \end{figure}
 
 \subsection{Idea 4}
+
+Rating PCA  \cite{Shlens05atutorial}
+
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{pcagr.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Fri}
+	\label{fig:pcagr}
+\end{figure}
+
 \subsection{Idea 5}
+
 
 \section{Towards an Attrition Model}
 
 adf
+
+Our aim is now extend beyond exploratory data analysis and systematically construct 
+a model to predict whether an employee will remain with their original employer or 
+leave for another firm during a job transition.
 
 \subsection{Linear Review}
 
