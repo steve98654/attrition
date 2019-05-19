@@ -411,8 +411,8 @@ if __name__ == "__main__":
 
     # Begin studies 
     if True:
-        old_vs_new(df) 
-        #ratingPCA()
+        #old_vs_new(df) 
+        ratingPCA()
         #inttrans = industry_trans(df)
         #_varplot(df,'employeesTotalNum')
         #rating_comp(df)

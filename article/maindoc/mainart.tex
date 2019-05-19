@@ -110,7 +110,7 @@ as input into these models.
 In addition, we outline limitations of this dataset and ideas for improvement  
 in future work.
 
-\subsection{Data Source Description}
+\subsection{Data Source Description}\label{datdes}
 
 We worked in conjunction with the authors of \cite{Smart2016} to obtain 
 a collection of 5550 examples of employee job transitions between 
@@ -355,9 +355,18 @@ due to the skill requirements prevalence of IT positions across all these indust
 Finally, we note that the retail industry is the most popular industry to transition 
 into overall from a distinct original sector.
 
-\subsection{Idea 3}
+\subsection{Attrition Identification Variable Importance}
 
-
+Now, we separate out attrition dataset into the group of job transitions 
+where employees remained with their current employer, and those who 
+choose to find a new employer. We compared the distributions of all 
+numerical variables available in this dataset for both groups 
+in order to identify which variables has the most distinct 
+distributions.  In Figure \ref{fig:discdist}, we display the 
+distributions the original firm friend recommendation and 
+worklife balance rating variables for employees who 
+stayed with their original firm (green) or transition to a new one (red). 
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{discdist.pdf}
@@ -366,20 +375,78 @@ into overall from a distinct original sector.
     and external transitions}
 	\label{fig:discdist}
 \end{figure}
+%
+In addition, we note that the cultural rating distributions exhibited a similar 
+although less pronounced behavior.  This provides an indication that both 
+these variables will be of importance when attempting to discriminate between 
+the two groups in our latter predictive studies. 
 
-\subsection{Idea 4}
+\subsection{Firm Ratings Principal Components}
 
-Rating PCA  \cite{Shlens05atutorial}
+When users fill out Glassdoor surveys that ultimately determine the 
+company ratings provided in the attrition dataset, they are asked to 
+rate a firm in the nine categories described in Section \ref{datdes}.
+It is natural to allows one's overall view on the firm influence 
+the manner in which ratings are assigned for each of these
+categories, i.e. they are not necessarily independent.  We will 
+conduct a principal component analysis on a quantile normalized 
+version the our full original ratings dataset of nine categories in 
+order to ascertain the effective dimensionality of this information. 
 
+Specifically, let $r_i^j$ for $i=1,\ldots,n=5550$ and $j=1,\ldots,9$ denote 
+the $i$ ratings available for category $j$. Consider the sample covariance 
+estimator of the quantile normalized ratings data
+%
+\begin{equation}
+    \hat{\Sigma} = \frac{1}{n-1}\sum_{i=1}^n (r_i^j-\bar{r}^j)(r_i^j-\bar{r}^j)^T. 
+\end{equation}
+%
+where here $\bar{r}^j$ denotes the mean value of the $j$-th variable.  Then, we 
+perform an eigen-decomposition 
+%
+\begin{equation}
+    \hat{\Sigma} = Q\Lambda Q^{-1}
+\end{equation}
+%
+where here the $i$-th vector of $Q$ is the $i$-th eigenvector of $\hat{\Sigma}$ with 
+corresponding eigenvalue $\lambda_i$ which is the $(i,i)$ entry of the diagonal matrix 
+$\Lambda$.  This decomposition holds since $\hat{\Sigma}$ is assumed to be positive 
+definition, and addition, we take an ordering $\lambda_1\geq\lambda_2\geq \ldots\geq \lambda_9$,
+c.f. \cite{Shlens05atutorial} for an overview of principal component analysis.
+
+In Figure, \ref{fig:pcagr}, in the left subplot we display a heatmap of the 
+original employer ranking correlation matrix.  Note that all such values 
+are generally ranking variables are highly correlated which demonstrates 
+that it is necessary to account for the dependency structure of the ranking 
+variables.  In the left subplot, we display the percentage variance explained curve 
+whose values are defined to be $w_i = \sum_{j=1}^i\lambda_i/\sum_{j=1}^9\lambda_j$. 
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{pcagr.pdf}
     %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
-	\caption{Fri}
+	\caption{Original employer ranking correlation matrix and percentage variance 
+    explained curve}
 	\label{fig:pcagr}
 \end{figure}
+%
+The first principal component contains just under 70\% of the variation of the data 
+and is given in normalized form by  
+%
+\begin{equation}
+    q_1 = [0.27,0.34,0.30,0.28,0.36,0.38,0.37,0.37,0.30] 
+\end{equation}
+%
+which is near a uniform weighted average of the rankings with additional 
+weight placed on career opportunities, overall, and friend recommendation, 
+senior management rankings. In addition the percentage variance explained 
+gradually increases to approximately 92\% at five principal components and 
+there is no clear separation between the signal and noise portions of this data.
+We conclude that it will be useful to include the quantile normalized 
+ranking weighted average in our subsequent predictive studies, but we 
+also retain all ratings variables given these percentage variance explained results. 
 
-\subsection{Idea 5}
+\subsection{Idea 5: THINK OF IDEA}
 
 
 \section{Towards an Attrition Model}
