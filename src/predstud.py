@@ -9,7 +9,7 @@ from collections import Counter
 from numpy.linalg import eig
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.metrics import roc_curve
 
 plt.rc('text', usetex=True)
@@ -75,10 +75,18 @@ if __name__ == "__main__":
 
     fpr, tpr, thresh = roc_curve(y_test,predvls)
 
+    # model 2
+    # WORK ON THIS MORE ... UNDERSTAND WHY UNDER PREF.
+    model = LogisticRegression().fit(X_train,y_train)
+    y_pred_logistic = model.predict(X_test)
+
+    fpr1, tpr1, thresh1 = roc_curve(y_test,y_pred_logistic)
+
     plt.figure()
     
     plt.plot([0, 1], [0, 1],'r--')
     plt.plot(fpr,tpr)
+    plt.plot(fpr1,tpr1)
     plt.axis('equal')
     plt.xlim([0,1])
     plt.ylim([0,1])
