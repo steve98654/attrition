@@ -88,6 +88,10 @@ def ratingPCA():
 
     ev,evc = eig(covmat)
 
+    print evc[:,1]
+
+    import ipdb
+    ipdb.set_trace()
 
     plt.figure()
     plt.subplot(1,2,1)
@@ -100,12 +104,6 @@ def ratingPCA():
     sns.tsplot(pltsrs,range(1,len(ev)+1))
     plt.title('Cum. Var. Explained')
     plt.xlabel('Numbers of PCs')
-
-    import ipdb
-    ipdb.set_trace()
-
-
-# 13, 15 , 19, 20   
 
 def _varplot(tmpdf,varname,iflog=False): 
     '''
