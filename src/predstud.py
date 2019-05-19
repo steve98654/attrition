@@ -11,6 +11,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.metrics import roc_curve
+from sklearn.svm import SVC
 
 plt.rc('text', usetex=True)
 
@@ -62,10 +63,30 @@ if __name__ == "__main__":
     df = pd.read_csv('data.csv')
 
     pdf = normdata_construct(df)
+
+    keepcols = ['leftEmployer', 
+                'jobLength_old', # in months
+                'avgSalary',
+                'ratingBusinessOutlook',
+                'ratingCareerOpportunities', 
+                'ratingCeo',
+                'ratingCompensationAndBenefits',
+                'ratingCultureAndValues', 
+                'ratingOverall',
+                'ratingRecommendToFriend',
+                'ratingSeniorManagement', 
+                'ratingWorkLifeBalance',
+                'employeesTotalNum',
+                #'yearFounded',
+                'gdSectorName',
+                'metro',
+                'jobTitle']
+
+    pdf = pdf[keepcols]
     
     X = pdf.iloc[:,1:].values
     y = pdf['leftEmployer'].values
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=43)
 
     reg = LinearRegression().fit(X_train, y_train)
     predvls = reg.predict(X_test)
@@ -78,15 +99,24 @@ if __name__ == "__main__":
     # model 2
     # WORK ON THIS MORE ... UNDERSTAND WHY UNDER PREF.
     model = LogisticRegression().fit(X_train,y_train)
-    y_pred_logistic = model.predict(X_test)
+    y_pred_logistic = model.decision_function(X_test)
 
     fpr1, tpr1, thresh1 = roc_curve(y_test,y_pred_logistic)
+
+    # model 3
+    model = SVC(kernel='rbf',gamma='auto').fit(X_train,y_train)
+    y_pred_svc = model.decision_function(X_test)
+
+    fpr2, tpr2, thresh2 = roc_curve(y_test,y_pred_svc)
+
+    # model 4 naieve bayes
 
     plt.figure()
     
     plt.plot([0, 1], [0, 1],'r--')
     plt.plot(fpr,tpr)
     plt.plot(fpr1,tpr1)
+    plt.plot(fpr2,tpr2)
     plt.axis('equal')
     plt.xlim([0,1])
     plt.ylim([0,1])
