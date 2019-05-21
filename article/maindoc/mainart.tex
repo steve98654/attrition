@@ -381,7 +381,7 @@ although less pronounced behavior.  This provides an indication that both
 these variables will be of importance when attempting to discriminate between 
 the two groups in our latter predictive studies. 
 
-\subsection{Firm Ratings Principal Components}
+\subsection{Firm Ratings Principal Components}\label{pcasec}
 
 When users fill out Glassdoor surveys that ultimately determine the 
 company ratings provided in the attrition dataset, they are asked to 
@@ -455,17 +455,114 @@ We now focus on extending beyond the prior exploratory data analysis and systema
 a series of refined models to predict whether an employee will remain with their original employer or 
 leave for another firm during a job transition. ADD SUMMARY AFTER FINISHED
 
+In all models considered below, we uniformly randomly partition our dataset into 80\% training data 
+and 20\% test data.  All models are trained using 5-fold cross validation and all performance 
+results are based on evaluation of each model on the test set.  Moreoever, each model 
+was only ran on the test set a single time. 
+
 \subsection{Linear Review}
-First, we recall the linear model in \cite{Smart2016} where the authors found 
+First, we recall the linear model in \cite{Smart2016} where the authors fit a linear model 
+%
+\begin{equation} 
+    y = \beta^Tx + \epsilon 
+\end{equation} 
+% 
+where here $\beta = (\beta_0,\ldots,\beta_m)$ and $x=(1,x_1,\ldots,x_{n})$. The 
+target variable $y$ is interpreted a probability of leaving their employer and 
+$x_i$ denote normalized versions of the ratings, salary, job length, and 
+associated control variables including the employee's industry and job title, original 
+employer's metro area.
 
-\subsection{Logistic Work}
+This model is fit in the usual fashion through 
+%
+\begin{equation}
+    \hat{\beta} = (x^Tx)^{-1}x^Ty
+\end{equation}
+%
+which produces a decision function for each job transition from which we may classify 
+each as more probably to remain or leave their current employer; here predicted probabilities 
+are capped at 1 and floored at 0. Note that the variables 
+that are utilized within this model only depend upon information related to the employee's 
+current employer which is often the only information that Human Resources staff have 
+readily available.  We implement this model and use it as a baseline for comparison against the other
+binary classifers considered below. 
+
+\subsection{Logistic Regression} We next extend to a logistic regression model with the 
+same variables as the linear model which 
+is more suitable for probability prediction and more specifically binary classification 
+problems.   In particular, we fit the model 
+%
+\begin{equation}
+    y = (1+\exp(-\beta^Tx))^{-1}.
+\end{equation}
+% 
+where here again the target $y$ represents the probability of leaving the firm. 
+Note know that $y\in[0,1]$ which are appropriate bonds for a probability.  This 
+model is fit to our data through maximum likelihood estimation. 
+
+\subsection{Decision Tree Classifier}  Next, we explored a variety of additional 
+binary classification models utilizing one original employer variables described above.
+In particular, we examined quadratic discriminant based classifers, support vector classifiers, 
+and tree based methods, among a variety of other techniques.  We found that decision 
+trees provided the strongest predictive performance relative to model complexity. 
+In particular, if we significantly increase model complexity, we can marginally outperform 
+a decision tree classifer; however, it is likely such gains are not meaningful and 
+a result of implicit overfitting. 
 
 
-\subsection{Binary Classifier}
+When constructing decision tree models, we explored trees with depths from 2 to 10 and 
+found that depth 5 trees has the strongest overall performance from an area under their 
+associated ROC curves. 
+A decision tree is fit to the attrition data by using a greedy technique of 
+iteratively determining which feature and threshold minimizes performance error 
+at each level of the tree.  This method is iteratively applied until we arrive 
+a tree depth of level 5, and then branches that only marginally contribute 
+the ROC curve are pruned.  
+
+\subsection{Utilizing the Full Feature Set} 
+Now, we extend our previous methods by considering an extension of our 
+prior dataset.  In order to apply such methods, one would need to have 
+access related to employee's new employers ratings and average salary information.
+Given this information, we add the relative change of each rating category and average 
+salary as features.  In addition, we add in the weighted rating PCA feature 
+described in section \ref{pcasec}.
+
+We consider the performance of the linear classifier and decision tree in this 
+case as well. In addition, we perform a broader search over binary classifiers to 
+determine one that has the best performance from a ROC curve perspective. DISCUSS SEARCH 
+MORE.  The highest performing such model is 
+
+
+The root node of this tree is associated with the 
+compensation and benefits relative change feature and many branch nodes 
+are rooted in other rating features, especially the overall rating, 
+career opportunities, and friend recommendation features.
 
 \subsection{Model Performance Comparison}
 
+Original model performance ... 
+
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{oriROC.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{ROC Curves using ... }
+	\label{fig:orgroc}
+\end{figure}
+
+Adding additional features 
+
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{fullROC.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{ROC full Curves using ... }
+	\label{fig:orgroc}
+\end{figure}
+
 \section{Conclusions and Extensions}
+
+DESCRIBE HOW ROC CURVES ARE FORME VIA THRESHOLDING 
 
 
 Here we describe several ideas to pursue as part of this study
