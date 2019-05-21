@@ -91,17 +91,34 @@ we conduct a quantitative data analysis of employee attrition motivations as wel
 predictive models that will enable human resources staff identify employees whose firm separation 
 may be imminent.
 
-We extend the work of \cite{Smart2016} who examine employee attrition and retention issues based upon 
-a collection of approximately five thousand anonymously submitted resumes to Glassdoor.  We provide 
-SUMMARY OF DATA ANLAYSIS EXTENSIONS.  In addition, SUMMARY OF NEW MODELS. Lastly, we delineate 
+The main contributions of this work include an extension of \cite{Smart2016} who examine employee 
+attrition and retention issues based upon 
+a collection of approximately five thousand anonymously submitted resumes to Glassdoor.  
+Specifically, we examine industry job transition patterns, independence of company ratings 
+provided on the GlassDoor website, and distribution related aspects of these variables 
+contained in this dataset.  We further consider how to apply modern binary classification 
+methods to predict the likelihood of employee attrition.  In particular, we examine the 
+performance of the linear model considered in \cite{Smart2016} against logistic regression, 
+decision tree classifiers, and random forests.  We then extend the feature set considered, 
+and perform a thorough search over dozens of binary classification methods to determine 
+the top performers which we find to be tree based methods.
+ Lastly, we delineate 
 future data acquisition, analysis and model development extensions that we seek to investigate 
 in future work. Although a few authors have recently approached attrition prediction 
 from a modern classification model perspective, i.e. \cite{Fri2018}, we conduct a 
 thorough test of dozens of such models and conclude tree based models offer the strongest performance
 
-This article is organized as follows ... TYPE WHEN FINISHED 
+This article is organized as follows in Section \ref{datsec}, we describe the content 
+of the job transition dataset being considered and perform an compile a number of 
+summary statistics that motivate latter model development.  In Section \ref{datstu},
+we consider a more detailed examine of this dataset by identifying industry transition 
+patterns, variable importance related to attrition identification, and 
+rating variable independence.  Then in section \ref{modsec}, we consider several 
+models to address the binary classification attrition problem and provide a 
+corresponding performance comparison.  Finally, in section \ref{consec}, we 
+summarize our main findings and provide ideas for future extensions of this work.
 
-\section{Data Description and Feature Engineering}
+\section{Data Description and Feature Engineering} \label{datsec}
 
 We first turn to describing the content extracted from a collection of 
 employee resumes that will form the basis for the subsequent attrition studies. 
@@ -294,11 +311,17 @@ differences in these variables and thus include them as features.  We finally no
 all variables are quantile normalized in our predictive model studies so as not to bias 
 methods considered due to scaling effects.
 
-\section{Exploratory Insights}
+\section{Exploratory Insights} \label{datstu}
 
 Now we describe a number of findings that were the results of an exploratory analysis of 
 the job transition dataset which go beyond the level of summary statistics.  In particular, 
-DESCRIBE FINDINGS WHEN FINISHED
+examine to what extent salary increases motivate job transition and if employees decide to 
+change industry, we study which industries they are most likely to move towards.  We then 
+identify which variables with partitioned into employees that remained or left their 
+firm differ the most from a distributional perspective to gain intuition on what 
+factors should be most important for subsequent model development.  Finally, 
+we investigate to what degree the nine rating categories are dependent and 
+compute the effective dimension of these variables.
 
 \subsection{Transition Salary Changes}
 An opportunity to earn a greater salary is often described as a primary motivation 
@@ -449,10 +472,7 @@ We conclude that it will be useful to include the quantile normalized
 ranking weighted average in our subsequent predictive studies, but we 
 also retain all ratings variables given these percentage variance explained results. 
 
-\subsection{Idea 5: THINK OF IDEA}
-
-
-\section{Towards an Attrition Model}
+\section{Towards an Attrition Model}\label{modsec}
 
 We now focus on extending beyond the prior exploratory data analysis and systematically construct 
 a series of refined models to predict whether an employee will remain with their original employer or 
@@ -605,7 +625,7 @@ performance whereas the logistic regression model degrades in performance.  Howe
 tree model also improves slightly.  Both examples provide a strong indicate that tree based models 
 provide a good framework for the design of employee attrition classification. 
 
-\section{Conclusions and Extensions}
+\section{Conclusions and Extensions} \label{consec}
 
 In summary, we have obtained a dataset of employee job transitions generated from 
 anonymously submitted resumes through Glassdoor's online portal. We found several 
