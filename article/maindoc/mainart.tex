@@ -22,7 +22,7 @@
 % smaller than 5cm (the original size).
 
 
-\title{An Explicative and Predictive Study of Employee Attrition}
+\title{An Explicative and Predictive Study of Employee Attrition using Tree based Models}
 
 \author{Nesreen El-rayes\\
   MTSM at NJIT \\
@@ -45,10 +45,11 @@ WRITE THIS IN THE END
 \section{Introduction}
 Building and maintaining a stable, productive, collaborative, and high-quality workforce is a primary concern 
 for the majority of managing principals as success in this area tends to be a key factor contributing the 
-overall firm prosperity [CITATIONS??].  Inevitably, all firms will experience employee attrition.  
+overall firm prosperity, c.f. \cite{Mir1993} for a survey of relevant issues.
+Inevitably, all firms will experience employee attrition.  
 Involuntary attrition is often the result of profitability and performance pressures, department or business 
-line obsolescence, and mergers and acquisitions, among other factors [CITATIONS??].  In contrast,
-voluntary attrition is driven predominately by employee concerns [CITATIONS].  Such considerations 
+line obsolescence, and mergers and acquisitions, among other factors \cite{Datta2009,Grip2006,SHAU1998}.  In contrast,
+voluntary attrition is driven predominately by employee concerns \cite{Singh2012}.  Such considerations 
 my focussed around, but not limited to, managerial direction, compensation and benefits, firm culture, 
 firm desirability and location, promotion potential as well as non firm specific motivations, e.g. medical 
 conditions or retirement. 
@@ -94,7 +95,9 @@ We extend the work of \cite{Smart2016} who examine employee attrition and retent
 a collection of approximately five thousand anonymously submitted resumes to Glassdoor.  We provide 
 SUMMARY OF DATA ANLAYSIS EXTENSIONS.  In addition, SUMMARY OF NEW MODELS. Lastly, we delineate 
 future data acquisition, analysis and model development extensions that we seek to investigate 
-in future work. 
+in future work. Although a few authors have recently approached attrition prediction 
+from a modern classification model perspective, i.e. \cite{Fri2018}, we conduct a 
+thorough test of dozens of such models and conclude tree based models offer the strongest performance
 
 This article is organized as follows ... TYPE WHEN FINISHED 
 
@@ -453,11 +456,18 @@ also retain all ratings variables given these percentage variance explained resu
 
 We now focus on extending beyond the prior exploratory data analysis and systematically construct 
 a series of refined models to predict whether an employee will remain with their original employer or 
-leave for another firm during a job transition. ADD SUMMARY AFTER FINISHED
+leave for another firm during a job transition.  We consider two datasets below first 
+consisting of the original variables considered in \cite{Smart2016} and then an extended 
+version which includes additional features further described below. Initially we 
+consider simple linear and logistic regression and decision tree classifiers to establish 
+baseline results.  We then more systematically search through several dozen binary classification 
+methods to identify which have the strongest performance from an ROC curve perspective.  We find 
+that tree based models tend to be identified in this regard and discuss the top performers 
+in detail below. 
 
 In all models considered below, we uniformly randomly partition our dataset into 80\% training data 
 and 20\% test data.  All models are trained using 5-fold cross validation and all performance 
-results are based on evaluation of each model on the test set.  Moreoever, each model 
+results are based on evaluation of each model on the test set.  Moreover, each model 
 was only ran on the test set a single time. 
 
 \subsection{Linear Review}
@@ -578,7 +588,7 @@ is 65\%, 70\%, and 73\%, respectively.
 
 We next consider models evaluated on our extended features set; specifically, we add the 
 rating PCA feature and the relative change in the employees salary after a job transition. 
-The updated ROC curves are displayed in Figure \ref{fullroc}
+The updated ROC curves are displayed in Figure \ref{fig:fullroc}
 %
 \begin{figure}[thb]
     \centering
@@ -597,32 +607,44 @@ provide a good framework for the design of employee attrition classification.
 
 \section{Conclusions and Extensions}
 
-DESCRIBE HOW ROC CURVES ARE FORME VIA THRESHOLDING 
+In summary, we have obtained a dataset of employee job transitions generated from 
+anonymously submitted resumes through Glassdoor's online portal. We found several 
+insights upon an initial study of this data which provided an indication that 
+compensation, company culture, and senior management performance play major 
+roles in influencing an employee's job transition decision.  We then further investigated 
+aspects of this data including generating an industry job transition table, identify 
+which variables had the most significant changes in distribution for employees 
+that stayed or left their current employers, and constructed ratings features 
+based on a PCA study. We then applied several binary classification models 
+to the employee attrition problem and found that tree based methods tended to 
+offer the strongest performance.  In particular, in the case of the original 
+variables specified in \cite{Smart2016}, simple decision trees offer strong 
+performance whereas one of their extensions random forests provided a 
+marginal increase at the addition of increased complexity.  Finally, we added 
+in two new features including our original PCA based ratings feature
+and the percentage salary increase of the job transition.  
 
+We finally describe several ideas that we plan on pursing in future work.  First, 
+we would like to construct a more extensions dataset of employee attrition data that goes
+well beyond the 5550 job transitions considered in this article.  In particular, 
+we hope to work with Glassdoor and/or LinkedIn to build a more extensive database of 
+employee job transitions and associated company ratings. In addition, we would like to 
+obtain company specific job transition information from LinkedIn which would permit 
+more detailed attrition studies at the company and industry level to further 
+the work of \cite{Bennet1993}.  In addition factors such as employee 
+engagement and absence are known to have a strong connection with employee attrition 
+\cite{Kumar2015,Mitra1992}.  Lastly, we 
+note that if one wishes to examine the attrition problem in the greatest detail 
+possible, then one would have to partner with firm to obtain specific detailed 
+internal attrition records.  One could then develop company specific models, 
+assuming sufficient data exists, that may be able to further extract information 
+related to nuanced attrition patterns for that particular company.  The results 
+may then be merged with verbal information gathered at exit interviews and 
+human resource staff expertise to establish an attrition prevention plan. 
 
-Here we describe several ideas to pursue as part of this study
-
-Mention limitations here (same as in glassdoor article and others that we find) ... then 
-mention that our extensions will overcome these limitations 
-
--- company specific analytics
--- competative analysis
--- linkedin, full glassdoor dataset 
--- outlier determination may serve as a glassdoor fake review filter 
-
-
-% For one-column wide figures use
-%\begin{figure}[thb]
-	% Use the relevant command to insert your figure file.
-	% For example, with the graphicx package use
-%    \centering
-%	\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{sample-image}
-	% figure caption is below the figure
-%	\caption{Sample figure with caption.}
-%	\label{fig: sample-figure}       % Give a unique label
-%\end{figure}
-
-\textbf{Acknowledgements:} The authors would like to ack... for sharing data FINISH WHEN DONE
+\textbf{Acknowledgements:} The authors would like to acknowledge Andrew Chamberlain, 
+Chief Economist at Glassdoor, for sharing the job transition dataset that served 
+as the data source for this study. 
 
 % if added before the last page, this command can help balancing columns
 %\addtolength{\textheight}{-.2cm} 
@@ -631,43 +653,43 @@ mention that our extensions will overcome these limitations
 \bibliographystyle{ieeetr}
 \bibliography{sample}
 
-\begin{enumerate}
-    \item how does salary increase compare with internal vs external transition? 
-    \item Founding date vs tenure
-    \item Let's focus on Leaving a company, not just different role in same company 
+%\begin{enumerate}
+%    \item how does salary increase compare with internal vs external transition? 
+%    \item Founding date vs tenure
+%    \item Let's focus on Leaving a company, not just different role in same company 
     %\item Look at rankings from old company to new one; what can we say overall about 
     %     the characteristics of these companies?  What factors did we see the most signi
     %     change in? Make scatter plots/hists here 
-    \item job title transition? progression ... Markov chain? 
-    \item What other summary statistics are relevant that go beyond what is already in 
-          the Glassdoor article? 
-    \item Do a brief literature review.  What has been done in this area already?
-          Summarize Glassdoor as part of this ... describe the uniqueness of this dataset. 
-          Mention it would be of interest to expand ... mine LinkedIn as well to do a 
-          more thorough study later. 
-    \item do reasons vary by length of job??? 
-    \item Look at people who made a major change (e.g. shifted geographic regions. ... more than 500 miles 
-          away ... is motivation any different for these people?)
-    \item Look at how old vs new ranking variable scatter plots differ from the y=x line, 
-        e.g. if employees change, which variables to we find also change significantly?  
-          Do some change always in the upwards direction? Linear reg. essentially tries 
-          to understand to what extent is this line differs from 1, e.g. if it is 1 for 
-          a given variable, then this variable has no influence ... can we develop a 
-          better variable influence measure here? 
-    \item Look at people who switched industries ... any different motivation here? 
-    \item One interesting feature is that employees seldom seem to stay at a company that has the 
-          same size as their old one.  Lots of shirts from large to small or vice versa.  Perhaps 
-          make this more quantitative? 
-    \item  check if job-len corresponds to start,end date difference 
-    \item Any info associated with geographic studies?  Large vs small cities? 
-    \item  patterns that stem from either age or employment tenure? 
-    \item binary model classifer, ROC curve etc. 
-    \item impl their original regression model ... test 
-    \item  industry specific studies 
-    \item Distribution of dates that changes were made ... do we see a pattern on times of the 
-          year that moves occurred 
-    \item explore patterns between old and new firms using year founded 
-\end{enumerate}
+%    \item job title transition? progression ... Markov chain? 
+%    \item What other summary statistics are relevant that go beyond what is already in 
+%          the Glassdoor article? 
+%    \item Do a brief literature review.  What has been done in this area already?
+%          Summarize Glassdoor as part of this ... describe the uniqueness of this dataset. 
+%          Mention it would be of interest to expand ... mine LinkedIn as well to do a 
+%          more thorough study later. 
+%    \item do reasons vary by length of job??? 
+%    \item Look at people who made a major change (e.g. shifted geographic regions. ... more than 500 miles 
+%          away ... is motivation any different for these people?)
+%    \item Look at how old vs new ranking variable scatter plots differ from the y=x line, 
+%        e.g. if employees change, which variables to we find also change significantly?  
+%          Do some change always in the upwards direction? Linear reg. essentially tries 
+%          to understand to what extent is this line differs from 1, e.g. if it is 1 for 
+%          a given variable, then this variable has no influence ... can we develop a 
+%          better variable influence measure here? 
+%    \item Look at people who switched industries ... any different motivation here? 
+%    \item One interesting feature is that employees seldom seem to stay at a company that has the 
+%          same size as their old one.  Lots of shirts from large to small or vice versa.  Perhaps 
+%          make this more quantitative? 
+%    \item  check if job-len corresponds to start,end date difference 
+%    \item Any info associated with geographic studies?  Large vs small cities? 
+%    \item  patterns that stem from either age or employment tenure? 
+%    \item binary model classifer, ROC curve etc. 
+%    \item impl their original regression model ... test 
+%    \item  industry specific studies 
+%    \item Distribution of dates that changes were made ... do we see a pattern on times of the 
+%          year that moves occurred 
+%    \item explore patterns between old and new firms using year founded 
+%\end{enumerate}
 
 \end{document}
 
