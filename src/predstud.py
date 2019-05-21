@@ -90,6 +90,7 @@ def feature_add(df):
     '''  
     pcawgts = np.array([0.27362386, 0.34379945, 0.29999705, 0.2817328 , 0.35799411, 0.38224064, 0.36879486, 0.36867397, 0.30226229])
 
+
     orgdf = pd.read_csv('data.csv')
 
     df['ratepca_f'] = df[RATFLD].dot(pcawgts) 
@@ -97,14 +98,14 @@ def feature_add(df):
 
     # salary and ratings percentage increase old to new 
 
-    newflds = RATFLD + ['avgSalary']
+    newflds = ['avgSalary']
     #newflds = RATFLD + ['avgSalary','employeesTotalNum']
     newnewflds = [val + '_new' for val in newflds]
 
     for fld1,fld2 in zip(newflds,newnewflds): 
         df[fld1+'_f'] = (orgdf[fld2] - orgdf[fld1])/orgdf[fld1]  
 
-    df['job_f'] = (orgdf['jobLength_new'] + orgdf['jobLength_old'])/orgdf['jobLength_old']
+    #df['job_f'] = (orgdf['jobLength_new'] + orgdf['jobLength_old'])/orgdf['jobLength_old']
     
     return df 
 
@@ -115,13 +116,11 @@ if __name__ == "__main__":
     dropcols = ['gdSectorName','metro','jobTitle'] 
     pdf = pdf.drop(dropcols,axis=1)
 
-    import ipdb 
-    ipdb.set_trace()
-
     ## REMOVE COLS THAT SHOULD NOT BE HERE 
 
     # add features to df 
     pdf =feature_add(pdf) 
+
 
     ## QUANTILE NORMALIZE HERE ... TRY WITHOUT FIRST 
 

@@ -529,36 +529,71 @@ described in section \ref{pcasec}.
 
 We consider the performance of the linear classifier and decision tree in this 
 case as well. In addition, we perform a broader search over binary classifiers to 
-determine one that has the best performance from a ROC curve perspective. DISCUSS SEARCH 
-MORE.  The highest performing such model is 
+determine one that has the best performance from a ROC curve perspective. 
+In particular, we considered an ensemble of general linear models, neural network based 
+classifiers, SVCs with multiple kernels, nearest-neighbor classifiers, and many more.
+The highest performing model was a light gradient boosted tree classifer with 
+early stopping which exhibits similarities to the random forest 
+previously considered.  Specifically, gradient boosting combines many decision 
+trees into an ensemble model in a manner that minimized the mean squared 
+error of predicted vs actual target values.  This process is inheritably iterative 
+and the early stopping criteria terminates then process when addition of 
+further trees no longer improve the out of sample predictive performance of the mode.
 
-
-The root node of this tree is associated with the 
+The root nodes of this trees in this model tend to associated with the 
 compensation and benefits relative change feature and many branch nodes 
 are rooted in other rating features, especially the overall rating, 
 career opportunities, and friend recommendation features.
 
 \subsection{Model Performance Comparison}
 
-Original model performance ... 
+We finally evaluate the performance of all binary classifiers considered by displaying their 
+receiver operating characteristic curves.  Each model assigns a probability of the employee 
+remaining at or leaving the firm for each job transition.  To generate the ROC curve, 
+we set a probability threshold two which prediction probabilities below this probability 
+will be assigned to the stay group and other will be assigned to the leave group.  
+Then true positive rate defined to be the total true positive predictions divided 
+by the sum of the true positives and false negatives is plotted against the 
+false positive rate defined to be the number of false negatives divided by the 
+sum of true negatives and false negatives.
 
+First, models trained on the original variable set described in \cite{Smart2016} 
+have their ROC curves displayed in Figure \ref{fig:orgroc}.
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{oriROC.pdf}
     %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
-	\caption{ROC Curves using ... }
+	\caption{ROC curves for models trained on original variables}
 	\label{fig:orgroc}
 \end{figure}
+%
+Note that the performance of the linear and logistic regression models is very similar. 
+In addition, the five level decision tree has stronger overall performance, and the 
+random forest which is an ensemble model of such trees has the greatest performance overall.
+However, additional complexity of the random forest raises the point that the simpler 
+single decision tree may be preferred in practice since gains for the random forest 
+are marginal.  Here the area under the ROC curve for the linear, decision tree an random forest 
+is 65\%, 70\%, and 73\%, respectively.  
 
-Adding additional features 
-
+We next consider models evaluated on our extended features set; specifically, we add the 
+rating PCA feature and the relative change in the employees salary after a job transition. 
+The updated ROC curves are displayed in Figure \ref{fullroc}
+%
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{fullROC.pdf}
     %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
-	\caption{ROC full Curves using ... }
-	\label{fig:orgroc}
+	\caption{ROC curves for models trained on full feature set}
+	\label{fig:fullroc}
 \end{figure}
+%
+Here the areas under the ROC curves are given by 67\%, 58\%, 73\%, and 76\%, which demonstrates 
+we are able to slightly improve the performance over the prior best model in the case of the 
+light gradient boosted tree.  In addition, note that the linear regression model as very similar 
+performance whereas the logistic regression model degrades in performance.  However the decision 
+tree model also improves slightly.  Both examples provide a strong indicate that tree based models 
+provide a good framework for the design of employee attrition classification. 
 
 \section{Conclusions and Extensions}
 
