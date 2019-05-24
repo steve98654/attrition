@@ -326,20 +326,21 @@ methods due to scaling effects.
 
 \section{Exploratory Insights} \label{datstu}
 
-Now we describe a number of findings that were the results of an exploratory analysis of 
+Now we describe a number of findings originating from the results of an exploratory analysis of 
 the job transition dataset which go beyond the level of summary statistics.  In particular, 
-examine to what extent salary increases motivate job transition and if employees decide to 
-change industry, we study which industries they are most likely to move towards.  We then 
-identify which variables with partitioned into employees that remained or left their 
+we examine to what extent salary increases motivate job transitions.  In addition, if employees decide to 
+change industry, we study which industries they are most likely to move towards conditioned 
+on their original industry.  We then 
+identify which variables when partitioned into employees that remained or left their 
 firm differ the most from a distributional perspective to gain intuition on what 
 factors should be most important for subsequent model development.  Finally, 
 we investigate to what degree the nine rating categories are dependent and 
 compute the effective dimension of these variables.
 
-\subsection{Transition Salary Changes}
+\subsection{Job Transition Salary Changes}
 An opportunity to earn a greater salary is often described as a primary motivation 
-for a job transition.  We seek to investigate this from a quantitative perspective 
-on our attrition dataset.  We first note that approximately 
+for a job transition.  We seek to investigate this from a quantitative perspective, 
+and first note that approximately 
 13\% of transitions occurred without a change in salary. 
 In Table \ref{fig:salgr}, we display relative (percentage increase/decrease) and  
 absolute salary changes. 
@@ -353,7 +354,7 @@ absolute salary changes.
 \end{figure}
 %
 First note that this example illustrates the need for considering 
-features such as relative change since the asymmetry of the relative change salary distribution is 
+features such as relative salary change since the asymmetry of the relative change salary distribution is 
 prominent whereas this is not as clear in the absolute change plot.  
 Second, note that there is a wide range of magnitudes of relative salary changes.  In particular, 
 approximately 5\% of employees received a salary increase of more than 150\%.  In 
@@ -363,16 +364,16 @@ received a salary increase which was in many cases quite substantial.
 In the extreme case, one employee transitioned from a teaching assistant to 
 education Director at Michigan State University and received approximately a 6X 
 salary increase.  In the opposite direction, one employee transitioned from a \$230,000 
-salary as a Managing Director in the Education industry to a Logistics coordinator 
+salary as a Managing Director in the Education industry to a Logistics Coordinator 
 with a \$43,600 annual salary. 
 
 \subsection{Industry Transition Patterns}
 
 Next, we examine how employers either choose to move to a new industry or remain
-in that of their origination firm as a consequence of their job transition.  
+in that of their original firm as a consequence of their job transition.  
 In Figure \ref{fig:transmat}, we display a heatmap of the percentage of 
-employees that started in an industry indicated by the left row labels and 
-transitioned into the industry on the lower column label. 
+employees that started in an industry indicated by the lower column labels and 
+transitioned into the industry in the row labels. 
 %
 \begin{figure}[thb]
     \centering
@@ -384,27 +385,28 @@ transitioned into the industry on the lower column label.
 \end{figure}
 %
 Note that both the energy and retail industries tend to retain a considerably 
-greater portion of their employees than the others.  An interesting example 
+greater proportion of their employees than the others.  An interesting example 
 along these lines is the Pharmaceutical industry of which 46\% of employees 
-transition to the retail industry while only 42\% remain; this is the only industry 
-that exhibits that feature.  Moreover, the information technology industry has 
+transition to the retail industry while only 42\% remain; this is the only industry in which 
+a greater percentage of employees transition to another industry rather than 
+remain in the original.  Moreover, the information technology industry has 
 the lowest retention rate with more than half of transitions out of this industry 
 going to the financial, health care, retail, and education sectors.  This is understandable 
-due to the skill requirements prevalence of IT positions across all these industries.  
+due to the skill requirement prevalence of IT positions across all these industries.  
 Finally, we note that the retail industry is the most popular industry to transition 
-into overall from a distinct original sector.
+into overall from a different original industry.
 
 \subsection{Attrition Identification Variable Importance}
 
-Now, we separate out attrition dataset into the group of job transitions 
-where employees remained with their current employer, and those who 
-choose to find a new employer. We compared the distributions of all 
-numerical variables available in this dataset for both groups 
-in order to identify which variables has the most distinct 
+Now, we separate the job transition  dataset into a retention subset 
+where employees remained with their current employer, and an attrition set for those who 
+choose to find a new employer. We compare the distributions of all 
+numerical variables available for both groups 
+in order to identify which variables have the most distinct 
 distributions.  In Figure \ref{fig:discdist}, we display the 
-distributions the original firm friend recommendation and 
+distributions of the original firm friend recommendation and 
 worklife balance rating variables for employees who 
-stayed with their original firm (green) or transition to a new one (red). 
+stayed with their original firm (green) or transitioned to a new one (red). 
 %
 \begin{figure}[thb]
     \centering
@@ -423,21 +425,21 @@ the two groups in our latter predictive studies.
 \subsection{Firm Ratings Principal Components}\label{pcasec}
 
 When users fill out Glassdoor surveys that ultimately determine the 
-company ratings provided in the attrition dataset, they are asked to 
+company ratings provided in the job transition dataset, they are asked to 
 rate a firm in the nine categories described in Section \ref{datdes}.
 It is natural to allows one's overall view on the firm influence 
 the manner in which ratings are assigned for each of these
 categories, i.e. they are not necessarily independent.  We will 
 conduct a principal component analysis on a quantile normalized 
-version the our full original ratings dataset of nine categories in 
+version the full original ratings dataset of nine categories in 
 order to ascertain the effective dimensionality of this information. 
 
 Specifically, let $r_i^j$ for $i=1,\ldots,n=5550$ and $j=1,\ldots,9$ denote 
-the $i$ ratings available for category $j$. Consider the sample covariance 
+the $i$ ratings available for $j$ categories. Consider the sample covariance 
 estimator of the quantile normalized ratings data
 %
 \begin{equation}
-    \hat{\Sigma} = \frac{1}{n-1}\sum_{i=1}^n (r_i^j-\bar{r}^j)(r_i^j-\bar{r}^j)^T. 
+    \hat{\Sigma} = \frac{1}{n-1}\sum_{i=1}^n (r_i^j-\bar{r}^j)(r_i^j-\bar{r}^j)^T, 
 \end{equation}
 %
 where here $\bar{r}^j$ denotes the mean value of the $j$-th variable.  Then, we 
@@ -450,12 +452,12 @@ perform an eigen-decomposition
 where here the $i$-th vector of $Q$ is the $i$-th eigenvector of $\hat{\Sigma}$ with 
 corresponding eigenvalue $\lambda_i$ which is the $(i,i)$ entry of the diagonal matrix 
 $\Lambda$.  This decomposition holds since $\hat{\Sigma}$ is assumed to be positive 
-definition, and addition, we take an ordering $\lambda_1\geq\lambda_2\geq \ldots\geq \lambda_9$,
-c.f. \cite{Shlens05atutorial} for an overview of principal component analysis.
+definite, and in addition, we take an ordering $\lambda_1\geq\lambda_2\geq \ldots\geq \lambda_9$,
+c. f. \cite{Shlens05atutorial} for an overview of principal component analysis.
 
-In Figure, \ref{fig:pcagr}, in the left subplot we display a heatmap of the 
-original employer ranking correlation matrix.  Note that all such values 
-are generally ranking variables are highly correlated which demonstrates 
+In the left subplot of Figure \ref{fig:pcagr}, we display a heatmap of the 
+original employer ranking correlation matrix.  Note that all pairs 
+generally exhibit high correlation which demonstrates 
 that it is necessary to account for the dependency structure of the ranking 
 variables.  In the left subplot, we display the percentage variance explained curve 
 whose values are defined to be $w_i = \sum_{j=1}^i\lambda_i/\sum_{j=1}^9\lambda_j$. 
@@ -477,8 +479,8 @@ and is given in normalized form by
 \end{equation}
 %
 which is near a uniform weighted average of the rankings with additional 
-weight placed on career opportunities, overall, and friend recommendation, 
-senior management rankings. In addition the percentage variance explained 
+weight placed on career opportunities, overall rating, friend recommendation, and 
+senior management rankings. In addition, the percentage variance explained 
 gradually increases to approximately 92\% at five principal components and 
 there is no clear separation between the signal and noise portions of this data.
 We conclude that it will be useful to include the quantile normalized 
