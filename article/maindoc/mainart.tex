@@ -39,96 +39,107 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-WRITE THIS IN THE END
+We develop tree based models to estimate the probability of an employee leaving a 
+firm during a job transition from a dataset of anonymously submitted resumes 
+through Glassdoor's online portal.  Dataset  construction and summary 
+statistics are first summarized followed by a more in depth examination  
+through four exploratory studies.  Insights provided by these studies are then 
+used to engineer features that serve as input into subsequent attrition related 
+predictive models.  We finally perform a thorough search through several dozen binary 
+classification techniques in the cases of an original and extended feature set.  
+We find tree based methods including random forests and light gradient boosted trees 
+provide the overall strongest predictive performance.  Finally, we summarize ROC curves 
+for several such models and describe future potential research directions. 
 \end{abstract}
 
 \section{Introduction}
 Building and maintaining a stable, productive, collaborative, and high-quality workforce is a primary concern 
-for the majority of managing principals as success in this area tends to be a key factor contributing the 
-overall firm prosperity, c.f. \cite{Mir1993} for a survey of relevant issues.
+of the majority of corporate officers as success in this area tends to be a key contributing factor to the 
+overall prosperity of the firm, c.f. \cite{Mir1993} for a survey of relevant issues.
 Inevitably, all firms will experience employee attrition.  
 Involuntary attrition is often the result of profitability and performance pressures, department or business 
 line obsolescence, and mergers and acquisitions, among other factors \cite{Datta2009,Grip2006,SHAU1998}.  In contrast,
 voluntary attrition is driven predominately by employee concerns \cite{Singh2012}.  Such considerations 
-my focussed around, but not limited to, managerial direction, compensation and benefits, firm culture, 
-firm desirability and location, promotion potential as well as non firm specific motivations, e.g. medical 
+may focus around, but are not limited to, managerial direction, compensation and benefits, firm culture, 
+firm desirability and location, promotion potential as well as non-firm specific motivations, e.g. medical 
 conditions or retirement. 
   
 A central objective of the majority of human resource departments is to understand the root causes 
 behind voluntary employee attrition and develop an associated mitigation strategy.  Effectively 
-navigating such issues generally resulted in explicit positive monetary effects stemming from increased 
-firm revenue and cost reductions manifested through the work retained highly performant employees. 
+navigating such issues generally results in explicit positive monetary effects stemming from increased 
+firm revenue and cost reductions manifested through the work product of highly performant retained employees. 
 In addition, identifying and resolving issues found to be common to employee attrition often implicitly 
-enhances firm culture and workplace desirably which in turn enables the recruitment of higher quality 
-staff which further improve retention, firm operation, and business practices, c.f.  \cite{Cook1986,Free1994}.  
-The compounding effect nature of 
-this employee attrition feedback loop on the overall success or failure of the firm is the essential motive 
-for conducting a through investigation into this matter. 
+enhances firm culture and workplace desirably, which in turn, enables the recruitment of higher quality 
+staff who further improve retention, firm operation, and business practices, c.f.  \cite{Cook1986,Free1994}.  
+The compounding effect of the employee attrition feedback loop on overall firm
+success or failure provides, in our view, the essential motive to 
+investigate the issue. 
 
-Traditionally, employee attrition and retention issues tend to examined through qualitative and anecdotal 
-measures.  Specifically, human resources staff tend to conduct exit interviews after an employee provides 
+Traditionally, employee attrition and retention issues tend to examined by qualitative and anecdotal 
+measures.  Specifically, human resources staff typically conduct exit interviews after an employee provides 
 a resignation notice in order to ascertain the motivations behind the decision to leave \cite{Giac1991}.  Although 
 these conversations may be direct and candid, i.e. in the event an employee is leaving for a significantly 
-more senior role or needs to change geographic location for family reasons, in actuality, human resources staff
-encounter considerable difficulty discerning the employee's actual rationale.  By way of example, employees 
+more senior role or needs to change geographic location for family related purposes, in actuality, human resources staff
+encounter considerable difficulty discerning the employee's true motivation.  By way of example, employees 
 seldom offer negative criticism of management during exit interviews for fear of future personal retribution 
 or inadvertent retaliation towards their close colleagues who will still remain at the firm.
 These circumstances impact the employee attrition data aggregation and quality assurance process 
 by making it cumbersome, at a minimum, which leads to additional difficulties determining which 
 attrition issues should be of primary importance for management to resolve. In addition, employee 
-attrition data is typically high confidential and only accessible to key stakeholders internally 
-within a firm.  This fact has been a major impediment for the progression of academic research on 
+attrition data is generally highly confidential and only accessible to key stakeholders internally 
+within a firm.  This fact has been a major impediment to the progression of academic research on 
 this topic. 
 
-Recently, internet based platforms such as GlassDoor and LinkedIn oriented towards working 
-professionals have amassed large quantities of publicly available information related to individual 
+Recently, internet based platforms such as Glassdoor and LinkedIn, which are oriented towards working 
+professionals, have amassed large quantities of publicly available information from individual 
 employee resumes including employment history, frank reviews of firm culture, desirability, and management
 as well as anonymous feedback.  Although this data often lacks attritional motivation information at 
 the individual employee level, when combined with aggregate firm culture and management rankings, 
 one may glean a number of insights into the collective behavior and motivations behind individual 
 decisions to transition to a new employer. Our major aim is precisely in this vein.  More specifically, 
 we conduct a quantitative data analysis of employee attrition motivations as well as develop 
-predictive models that will enable human resources staff identify employees whose firm separation 
+predictive models that will enable human resources staff to identify employees whose firm separation 
 may be imminent.
 
-The main contributions of this work include an extension of \cite{Smart2016} who examine employee 
+The main contributions of this work include an extension of \cite{Smart2016} where the authors 
+examine employee 
 attrition and retention issues based upon 
 a collection of approximately five thousand anonymously submitted resumes to Glassdoor.  
 Specifically, we examine industry job transition patterns, independence of company ratings 
-provided on the GlassDoor website, and distribution related aspects of these variables 
+provided on the Glassdoor website, and distribution related aspects of these variables 
 contained in this dataset.  We further consider how to apply modern binary classification 
 methods to predict the likelihood of employee attrition.  In particular, we examine the 
 performance of the linear model considered in \cite{Smart2016} against logistic regression, 
-decision tree classifiers, and random forests.  We then extend the feature set considered, 
+decision tree classifiers, and random forests.  We then extend the feature set considered in this 
+first student 
 and perform a thorough search over dozens of binary classification methods to determine 
-the top performers which we find to be tree based methods.
+the top performers which we find to be tree based models.
  Lastly, we delineate 
 future data acquisition, analysis and model development extensions that we seek to investigate 
 in future work. Although a few authors have recently approached attrition prediction 
-from a modern classification model perspective, i.e. \cite{Fri2018}, we conduct a 
-thorough test of dozens of such models and conclude tree based models offer the strongest performance
+from a modern classification model perspective, i.e. \cite{Fri2018}, we conduct the first 
+thorough test of dozens of such models and conclude tree based models offer the strongest 
+overall performance from a ROC curve perspective.
 
-This article is organized as follows in Section \ref{datsec}, we describe the content 
-of the job transition dataset being considered and perform an compile a number of 
+This article is organized as follows: In Section \ref{datsec}, we describe the content 
+of the job transition dataset being considered and compile a number of 
 summary statistics that motivate latter model development.  In Section \ref{datstu},
-we consider a more detailed examine of this dataset by identifying industry transition 
+we pursue a more detailed examination of this dataset by identifying industry transition 
 patterns, variable importance related to attrition identification, and 
-rating variable independence.  Then in section \ref{modsec}, we consider several 
+rating variable independence.  Then in Section \ref{modsec}, we consider several 
 models to address the binary classification attrition problem and provide a 
-corresponding performance comparison.  Finally, in section \ref{consec}, we 
+corresponding performance comparison.  Finally, in Section \ref{consec}, we 
 summarize our main findings and provide ideas for future extensions of this work.
 
-\section{Data Description and Feature Engineering} \label{datsec}
+\section{Data Description and Summary} \label{datsec}
 
 We first turn to describing the content extracted from a collection of 
-employee resumes that will form the basis for the subsequent attrition studies. 
+employee resumes that will form the basis for subsequent attrition studies. 
 Next, we provide a variety of summary statistics of this information that 
 are relevant for the design of latter predictive models.  Then we discuss 
 our data normalization process and 
-several features constructed from this original data which will be utilized 
+features constructed from this original data which will be utilized 
 as input into these models.
-In addition, we outline limitations of this dataset and ideas for improvement  
-in future work.
 
 \subsection{Data Source Description}\label{datdes}
 
@@ -136,21 +147,21 @@ We worked in conjunction with the authors of \cite{Smart2016} to obtain
 a collection of 5550 examples of employee job transitions between 
 2007 and 2016 which were sourced from an extensive proprietary database of 
 resumes shared anonymously though Glassdoor's platform.  A job transition 
-is define to be any instance of an employee listing a new role on their 
-resume which may be associated with the present or original or a new employer
-designated as internal and external moves.  Internal moves are typically 
+is defined to be any instance of an employee listing a new role on their 
+resume which may be associated with the current or a new employer
+which distinguishes between internal and external moves.  Internal moves are typically 
 significant in the sense of the employee either changing roles or 
 being promoted within an organization as opposed to being reassigned 
 within a current team. External moves are of interest for our 
-attrition studies as in this situation employees leave their original 
+attrition studies since in this situation employees leave the original 
 firm entirely.
 
 We summarize several salient features of the dataset construction process 
 and expound upon details relevant to model development below; we refer the
 reader to \cite{Smart2016} for a complete description of the data source. 
 
-Each employ job transition contains 45 attributes.  Relevant attributes 
-include employee specific information. Namely, a binary identifier 
+Each employee job transition contains 45 attributes.  Relevant attributes 
+include employee specific information; namely, a binary identifier 
 indicating if the employee remained within or left their original firm,
 the start and end dates of employment at the original firm, the 
 employee's average salary during their tenure with the original employer, 
@@ -159,13 +170,13 @@ In addition, each transition includes employer related information.
 Specifically, employer name and metro location, the industry sector of which the employer 
 is a member, the founding year of the firm, and the total number of employees. 
 Finally, employer rating information is included.  Particular ratings are 
-given for the following GlassDoor created categories: overall, firm CEO, friend recommendation 
+given for the following Glassdoor created categories: overall, firm CEO, friend recommendation 
 business outlook, career opportunities, compensation and benefits, culture and values, 
-worklife balance, and senior management. 
+worklife balance, and senior management performance. 
 We note that in the event the employee transitioned to a new firm, when applicable,
 the above information specific to both the original and new employer is present in this dataset. 
 Finally, this dataset if fully populated with the exception of missing values in 
-approximate 6\% of the original and new employer founding year values, respectively;
+approximately 6\% of the original and new employer founding year values, respectively;
 such null values are disregarded 
 only in studies that depend upon this variable below.
 
@@ -173,10 +184,10 @@ only in studies that depend upon this variable below.
 
 First, several summary statistics are presented in order to outline 
 the main content of the dataset that will be further explored below.
-Next, we discuss our feature construction process to build variables 
+Next, we discuss our feature construction process to build inputs 
 that will be important to latter exploratory studies and predictive 
 model design.  Finally, we describe the quantile normalization process 
-we use in order to ensure all variables are on the same scale prior 
+that is utilized in order to ensure all variables are on the same scale prior 
 to being input into the predictive models.
 
 Of the 5550 total employee job transitions in this dataset, 
@@ -186,25 +197,27 @@ that approximately three quarters of employees leave their employer during a job
 transition.  We now graphically summarize several distributional aspects of 
 attributes associated with these transitions.
 
-Compensation, benefits, and other forms of financial remuneration are typically play 
-a critical role in an employee's job selection process.  In fact, an offer to 
+Compensation, benefits, and other forms of financial remuneration typically play 
+a critical role in an employee's job transition decision process.  In fact, an offer to 
 substantially increase one's salary is a common impetus for a job transition. 
 In the left subplot of Figure \ref{fig:avgsal}, we plot the average 
 annual salary distribution 
 of the employer during their tenure at their original employer over our full dataset.  
 Salaries ranged from \$15,140 to \$240,000 per year.  We note that this sample 
 is slightly overweight in terms of the representation of low-wage workers 
-in comparison with national income distributions [CITE]. In addition, 
+in comparison with national income distributions as compiled 
+by the Bureau of Labor and Statistics May 2018 National Occupational 
+Employment and Wage Estimates. In addition, 
 approximately 9\% of workers have salaries greater than \$100,000, which further 
-indicates a slight low-wage bias with respect to the entire US workforce population. 
+indicates a slight low-wage bias with respect to the entire United States workforce population. 
 However, we note the generate shape of this distribution does indeed closely approximate 
-that of the full workforce [CITE].
+that of the full workforce.
 %
 \begin{figure}[thb]
     \centering
 	\includegraphics[width=1.0\linewidth]{avgsal.pdf}
     %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
-	\caption{Employee average salary and tenure distribution at Original employer}
+	\caption{Employee average salary and tenure distribution at original employer}
 	\label{fig:avgsal}
 \end{figure}
 %
@@ -214,17 +227,17 @@ summary information presented in \cite{Smart2016}. Note that overall these tenur
 are relatively short and the distribution exhibits concentrated counts near end of year 
 times when performance reviews typically take place.  
 
-Next, in table \ref{tab:indtab}, we count the industry of the original employer 
+Next, in Table \ref{tab:indtab}, we count the industry of the original employer 
 of all job transitions being considered and display all such industries exceeding 
-50 such transitions.
+50 transitions.
 %
 \begin{table}
   \rowcolors{2}{gray!25}{white}
   \centering
-  \caption{Transition Counts Per Industry}
+  \caption{Job Transition Counts Per Industry}
   \begin{tabular}{cccc}
     \rowcolor{gray!50}
-      Industry & Cnt. & Industry & Cnt. \\
+      Industry & Count & Industry & Count \\
       Retail & 1357 & Manufact. & 191\\
       Education & 766 & Insurance & 144\\
       Info. Tech. & 718 & Media & 113\\
@@ -239,9 +252,9 @@ Original employer sector counts for industries with more than 50 job transitions
 \end{table}
 %
 Note that the Retail and Education industries are overrepresented which 
-provides a further indication as to why lower salaries are also above those of the 
-national distribution. In addition, we have sufficient data to study employee industry 
-transition patters for many of the industries listed in this table which 
+provides a further indication as to why this dataset includes a higher occurrence 
+of lower salaries  than the full national wage distribution. In addition, we have sufficient data to study employee industry 
+transition patterns for many of the industries listed in this table which 
 we explore in more detail in the subsequent section.
 
 In Figure \ref{fig:emplstat}, we display two additional histograms related to original 
@@ -258,21 +271,21 @@ dates are municipalities or governmental organizations.
 	\label{fig:emplstat}
 \end{figure}
 %
-Note that we have an effective samplings of older and modern firms with a 
+Note that we have an effective sampling of older and modern firms with a 
 median founding date of 1962.  In addition, we consider relatively few 
 firms that were founded within the past twenty years in this sample as 
 indicated by the height of the final bar of the histogram.   Next, in 
 the right subplot of Figure \ref{fig:emplstat}, we display the log-histogram 
 of the number of employees at each original firm being considered. The majority 
-of employees work at larger firms which employ between ten thousand and one million 
+of employees work at larger firms which employ between ten thousand to one million 
 people.  In particular, only a small fraction of employees work at small 
 firms with fewer than one hundred colleagues.  Finally, the largest employer 
 is Walmart with approximately 2.2 million employees.
 
 Next, in Figure \ref{fig:vioplt}, we display original employer violin plots of ratings data in nine 
-categories which includes career opportunities, compensation and benefits, company culture, 
-overall rating, senior management, work-life balance, outlook, CEO, and friend recommendation 
-ratings.  Here mean values are depicted by white circles in each form whereas standard deviations 
+categories presented for evaluation on Glassdoor's website which include career opportunities, compensation and benefits, company culture, 
+overall rating, senior management, work-life balance, outlook, CEO performance, and friend recommendation 
+ratings.  Here mean values are depicted by white circles within each form whereas standard deviations 
 about either side of the mean are displayed by centered black bars.  The general shape of 
 each violin is determined by a symmetric display of a kernel density estimate of the 
 probability distribution of each rating variable.
@@ -286,30 +299,30 @@ probability distribution of each rating variable.
 \end{figure}
 %
 Ratings with values in the $[0,5]$ range are plotted in the left subplot and those between 
-$[0,1]$ range are plotted in the right.  We note that no actual ratings fall outside these 
-bounds; the slight graphical extensions beyond these boundaries in the plot are due to 
+$[0,1]$ are plotted in the right.  We note that no actual ratings fall outside these 
+bounds; the slight graphical extensions beyond the boundaries in the plot are due to 
 artifacts of the kernel density estimation procedure required to 
-produce the visualization and not representative of the true data. 
-In addition note that one can see management ratings tend to be lower overall than 
+produce the visualization and are not representative of the true data. 
+In addition, note that one can see management ratings tend to be lower overall than 
 other related ratings in the left subplot.  In addition, cultural ratings exhibit 
 the greatest dispersion, whereas career ratings are comparatively concentrated.
-The distribution of $[0,1]$ vary considerably.  In particular, the CEO rating distribution 
-is concentrated to the right of the mean largely to a high occurrence of the maximum rating in 
+The distributions of $[0,1]$ valued ratings vary considerably.  In particular, the CEO rating distribution 
+is concentrated to the right of the mean largely to a high occurrence of maximum ratings in 
 approximately 9\% of the data.  In contrast, company outlook ratings are right-skewed with 
 a mean below the average score of 0.5.  Both are less dispersed than the friend recommendation 
 rating distribution that also is slightly oriented towards the positive side.
 
 We now describe several elementary features that we construct from the original data that 
 will be useful in the below exploratory and predictive studies.  In particular, we will 
-consider the percentage salary increase between after a transition has been made. 
+consider the percentage salary increase after a transition has been made. 
 In addition, we will consider quantile normalized absolute changes in each rating 
 category below, e.g. if an employee moved from a 75\%-tile overall rating employer 
-to an 85\%-tile, we will save the 10\%-ile difference as a feature.  We feel these 
-features are partially reflect the thought process of an employee who typically leaves an organization 
+to an 85\%-tile, we will save the 10\%-ile difference as a feature.  We feel that these 
+features are partially reflective of the thought process of an employee who typically leaves an organization 
 for higher salary and improved company culture based on the relative rather than absolute 
-differences in these variables and thus include them as features.  We finally note that 
+differences in these variables, and thus include them as features.  We finally note that 
 all variables are quantile normalized in our predictive model studies so as not to bias 
-methods considered due to scaling effects.
+methods due to scaling effects.
 
 \section{Exploratory Insights} \label{datstu}
 
