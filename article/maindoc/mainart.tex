@@ -111,13 +111,13 @@ contained in this dataset.  We further consider how to apply modern binary class
 methods to predict the likelihood of employee attrition.  In particular, we examine the 
 performance of the linear model considered in \cite{Smart2016} against logistic regression, 
 decision tree classifiers, and random forests.  We then extend the feature set considered in this 
-first student 
+first study 
 and perform a thorough search over dozens of binary classification methods to determine 
 the top performers which we find to be tree based models.
  Lastly, we delineate 
 future data acquisition, analysis and model development extensions that we seek to investigate 
 in future work. Although a few authors have recently approached attrition prediction 
-from a modern classification model perspective, i.e. \cite{Alao2013,Fri2018}, we conduct the first 
+from a modern classification model perspective, i.e. \cite{Alao2013,Fri2018, Naga}, we conduct the first 
 thorough test of dozens of such models and conclude tree based models offer the strongest 
 overall performance from a ROC curve perspective.
 
@@ -208,8 +208,7 @@ is slightly overweight in terms of the representation of low-wage workers
 in comparison with national income distributions as compiled 
 by the Bureau of Labor and Statistics May 2018 National Occupational 
 Employment and Wage Estimates. In addition, 
-approximately 9\% of workers have salaries greater than \$100,000, which further 
-indicates a slight low-wage bias with respect to the entire United States workforce population. 
+approximately 9\% of workers have salaries greater than \$100,000. 
 However, we note the generate shape of this distribution does indeed closely approximate 
 that of the full workforce.
 %
@@ -342,7 +341,7 @@ An opportunity to earn a greater salary is often described as a primary motivati
 for a job transition.  We seek to investigate this from a quantitative perspective, 
 and first note that approximately 
 13\% of transitions occurred without a change in salary. 
-In Table \ref{fig:salgr}, we display relative (percentage increase/decrease) and  
+In Figure \ref{fig:salgr}, we display relative (percentage increase/decrease) and  
 absolute salary changes. 
 %
 \begin{figure}[thb]
@@ -459,7 +458,7 @@ In the left subplot of Figure \ref{fig:pcagr}, we display a heatmap of the
 original employer ranking correlation matrix.  Note that all pairs 
 generally exhibit high correlation which demonstrates 
 that it is necessary to account for the dependency structure of the ranking 
-variables.  In the left subplot, we display the percentage variance explained curve 
+variables.  In the right subplot, we display the percentage variance explained curve 
 whose values are defined to be $w_i = \sum_{j=1}^i\lambda_i/\sum_{j=1}^9\lambda_j$. 
 %
 \begin{figure}[thb]
@@ -618,11 +617,11 @@ In addition, the five level decision tree has stronger overall performance, and 
 random forest which is an ensemble model of such trees has the greatest performance overall.
 However, the additional complexity of the random forest raises the point that the simpler 
 single decision tree may be preferred in practice since gains for the random forest 
-are marginal.  Here the area under the ROC curve for the linear, decision tree an random forest 
+are marginal.  Here the area under the ROC curve for the linear, decision tree and random forest 
 is 65\%, 70\%, and 73\%, respectively.  
 
 We next consider models evaluated on our extended feature set; specifically, we add the 
-rating PCA feature and the relative change in the employees salary after a job transition. 
+rating PCA feature and the relative change in the employee's salary after a job transition. 
 The updated ROC curves are displayed in Figure \ref{fig:fullroc}.
 %
 \begin{figure}[thb]
