@@ -348,6 +348,39 @@ def rating_comp(df):
 
     plt.show()
 
+def nes_plot():
+    '''
+    '''
+    raw_df = pd.read_csv('data.csv')
+    raw_df.drop(columns=['theSame'],inplace=True)
+    raw_df.drop(columns=['resumeId'],inplace=True)
+    raw_df.drop(columns=['startDate'],inplace=True)
+    raw_df.drop(columns=['endDate'],inplace=True)
+    raw_df.drop(columns=['startDate_new'],inplace=True)
+    raw_df.drop(columns=['endDate_new'],inplace=True)
+    raw_df.drop(columns=['jobTitle'],inplace=True)
+    raw_df.drop(columns=['employerName'],inplace=True)
+    raw_df.drop(columns=['jobTitle_new'],inplace=True)
+    raw_df.drop(columns=['employerName_new'],inplace=True)
+    clean_raw_df=raw_df.dropna(axis='rows')
+    
+    pltdf1 = clean_raw_df[clean_raw_df.leftEmployer==0]
+    pltdf2 = clean_raw_df[clean_raw_df.leftEmployer==1]
+
+    pltdf1 = pltdf1[pltdf1.yearFounded > 1800]
+    pltdf2 = pltdf2[pltdf2.yearFounded > 1800]
+
+    plt.figure()
+    plt.scatter(pltdf1.yearFounded,pltdf1.ratingOverall,alpha=0.3,label='Stayed')
+    plt.scatter(pltdf2.yearFounded,pltdf2.ratingOverall,alpha=0.3,label='Left')
+    plt.xlabel('Year Original Firm was Founded')
+    plt.ylabel('Overall Rating')
+    plt.title('Attrition vs Retention Comparison of Founding Year vs Overall Rating')
+    plt.legend()
+    #plt.plot(clean_raw_df.yearFounded,clean_raw_df.ratingOverall)
+    #sns.swarmplot(x="yearFounded", y="ratingOverall", hue="leftEmployer", data=clean_raw_df);
+    plt.show()
+
 if __name__ == "__main__":
     df = pd.read_csv('data.csv')
 
@@ -410,7 +443,8 @@ if __name__ == "__main__":
     # Begin studies 
     if True:
         #old_vs_new(df) 
-        ratingPCA()
+        #ratingPCA()
+        nes_plot()
         #inttrans = industry_trans(df)
         #_varplot(df,'employeesTotalNum')
         #rating_comp(df)

@@ -332,9 +332,11 @@ change industry, we study which industries they are most likely to move towards 
 on their original industry.  We then 
 identify which variables when partitioned into employees that remained or left their 
 firm differ the most from a distributional perspective to gain intuition on what 
-factors should be most important for subsequent model development.  Finally, 
+factors should be most important for subsequent model development.  Next, 
 we investigate to what degree the nine rating categories are dependent and 
-compute the effective dimension of these variables.
+compute the effective dimension of these variables.  Finally, we examine the relationship 
+between firm founding year, overall original firm rating, and whether or not an employee 
+remained with or left their original firm during a job transition.
 
 \subsection{Job Transition Salary Changes}
 An opportunity to earn a greater salary is often described as a primary motivation 
@@ -485,6 +487,35 @@ there is no clear separation between the signal and noise portions of this data.
 We conclude that it will be useful to include the quantile normalized 
 ranking weighted average in our subsequent predictive studies, but we 
 also retain all ratings variables given these percentage variance explained results. 
+
+\subsection{Attrition, Founding Year, and Overall Rating}
+Finally, we consider an interesting relationship between the founding year 
+of each employee's original firm and the corresponding overall rating that 
+they gave to the firm.  In Figure \ref{fig:attmod}, we display two scatter 
+plots of the original firm founding year against the overall original firm rating 
+for the groups of employees that stayed and left their original firm in blue and 
+orange respectively. 
+%
+\begin{figure}[thb]
+    \centering
+	\includegraphics[width=1.0\linewidth]{attrat.pdf}
+    %\includegraphics[trim={3cm 3cm 3cm 3cm}, clip,width=0.9\linewidth]{avgsal.eps}
+	\caption{Scatterplot of overall original firm rating vs original firm founding year}
+	\label{fig:attmod}
+\end{figure}
+%
+Note that these plots exhibit several interesting features.  First, if an employee gave 
+their original firm a high rating and the original firm year was founded prior to 
+say 1900, then a substantial majority of such employees remained at their original 
+firm.  In addition, since most firms with founding years in this range are municipalities, 
+this suggest government employees who are happy with their current firm are highly inclined 
+to remain at that firm.  In addition, note that overall ratings range varies as a function 
+of the original firm founding year.  In particular, ratings generally fall within 
+a [2.5,4.0] interval until approximately near a founding year of 1950 where they further 
+widen to the greatest range for newer firms founded past 2000.  Note the majority of 
+outlier overall ratings that exceed 4.5 or fall below 2.0 occur after 2000.  Finally, 
+lower overall ratings result in higher frequencies of employee attrition than higher ratings.
+
 
 \section{Towards an Attrition Model}\label{modsec}
 
