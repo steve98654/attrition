@@ -22,7 +22,7 @@
 % smaller than 5cm (the original size).
 
 
-\title{An Explicative and Predictive Study of Employee Attrition using Tree based Models}
+\title{An Explicative and Predictive Study of Employee Attrition using Tree-based Models}
 
 \author{Nesreen El-rayes\\
   MTSM at NJIT \\
@@ -39,7 +39,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We develop tree based models to estimate the probability of an employee leaving a 
+We develop tree-based models to estimate the probability of an employee leaving a 
 firm during a job transition from a dataset of anonymously submitted resumes 
 through Glassdoor's online portal.  Dataset  construction and summary 
 statistics are first summarized followed by a more in depth examination  
@@ -47,7 +47,7 @@ through four exploratory studies.  Insights provided by these studies are then
 used to engineer features that serve as input into subsequent attrition related 
 predictive models.  We finally perform a thorough search through several dozen binary 
 classification techniques in the cases of an original and extended feature set.  
-We find tree based methods including random forests and light gradient boosted trees 
+We find tree-based methods including random forests and light gradient boosted trees 
 provide the overall strongest predictive performance.  Finally, we summarize ROC curves 
 for several such models and describe future potential research directions. 
 \end{abstract}
@@ -75,7 +75,7 @@ The compounding effect of the employee attrition feedback loop on overall firm
 success or failure provides, in our view, the essential motive to 
 investigate the issue. 
 
-Traditionally, employee attrition and retention issues tend to examined by qualitative and anecdotal 
+Traditionally, employee attrition and retention issues tend to be examined by qualitative and anecdotal 
 measures.  Specifically, human resources staff typically conduct exit interviews after an employee provides 
 a resignation notice in order to ascertain the motivations behind the decision to leave \cite{Giac1991}.  Although 
 these conversations may be direct and candid, i.e. in the event an employee is leaving for a significantly 
@@ -87,7 +87,7 @@ These circumstances impact the employee attrition data aggregation and quality a
 by making it cumbersome, at a minimum, which leads to additional difficulties determining which 
 attrition issues should be of primary importance for management to resolve. In addition, employee 
 attrition data is generally highly confidential and only accessible to key stakeholders internally 
-within a firm.  This fact has been a major impediment to the progression of academic research on 
+within a firm.  These facts have been major impediments to the progression of academic research on 
 this topic. 
 
 Recently, internet based platforms such as Glassdoor and LinkedIn, which are oriented towards working 
@@ -105,7 +105,7 @@ The main contributions of this work include an extension of \cite{Smart2016} whe
 examine employee 
 attrition and retention issues based upon 
 a collection of approximately five thousand anonymously submitted resumes to Glassdoor.  
-Specifically, we examine industry job transition patterns, independence of company ratings 
+Specifically, we examine industry job transition patterns, dependencies between company ratings 
 provided on the Glassdoor website, and distribution related aspects of these variables 
 contained in this dataset.  We further consider how to apply modern binary classification 
 methods to predict the likelihood of employee attrition.  In particular, we examine the 
@@ -113,17 +113,17 @@ performance of the linear model considered in \cite{Smart2016} against logistic 
 decision tree classifiers, and random forests.  We then extend the feature set considered in this 
 first study 
 and perform a thorough search over dozens of binary classification methods to determine 
-the top performers which we find to be tree based models.
+the top performers, which we find to be tree-based models.
  Lastly, we delineate 
 future data acquisition, analysis and model development extensions that we seek to investigate 
 in future work. Although a few authors have recently approached attrition prediction 
 from a modern classification model perspective, i.e. \cite{Alao2013,Fri2018, Naga}, we conduct the first 
-thorough test of dozens of such models and conclude tree based models offer the strongest 
+thorough test of dozens of such models and conclude that tree-based models offer the strongest 
 overall performance from a ROC curve perspective.
 
 This article is organized as follows: In Section \ref{datsec}, we describe the content 
 of the job transition dataset being considered and compile a number of 
-summary statistics that motivate latter model development.  In Section \ref{datstu},
+summary statistics that motivate later model development.  In Section \ref{datstu},
 we pursue a more detailed examination of this dataset by identifying industry transition 
 patterns, variable importance related to attrition identification, and 
 rating variable independence.  Then in Section \ref{modsec}, we consider several 
@@ -136,10 +136,10 @@ summarize our main findings and provide ideas for future extensions of this work
 We first turn to describing the content extracted from a collection of 
 employee resumes that will form the basis for subsequent attrition studies. 
 Next, we provide a variety of summary statistics of this information that 
-are relevant for the design of latter predictive models.  Then we discuss 
+are relevant for the design of predictive models.  Then we discuss 
 our data normalization process and 
 features constructed from this original data which will be utilized 
-as input into these models.
+as inputs into these models.
 
 \subsection{Data Source Description}\label{datdes}
 
@@ -150,9 +150,8 @@ resumes shared anonymously though Glassdoor's platform.  A job transition
 is defined to be any instance of an employee listing a new role on their 
 resume which may be associated with the current or a new employer
 which distinguishes between internal and external moves.  Internal moves are typically 
-significant in the sense of the employee either changing roles or 
-being promoted within an organization as opposed to being reassigned 
-within a current team. External moves are of interest for our 
+significant in the sense that the employee was either changing roles or was
+being promoted within an organization. External moves are of interest for our 
 attrition studies since in this situation employees leave the original 
 firm entirely.
 
@@ -175,7 +174,7 @@ business outlook, career opportunities, compensation and benefits, culture and v
 worklife balance, and senior management performance. 
 We note that in the event the employee transitioned to a new firm, when applicable,
 the above information specific to both the original and new employer is present in this dataset. 
-Finally, this dataset if fully populated with the exception of missing values in 
+Finally, this dataset is fully populated with the exception of missing values in 
 approximately 6\% of the original and new employer founding year values, respectively;
 such null values are disregarded 
 only in studies that depend upon this variable below.
@@ -202,14 +201,14 @@ a critical role in an employee's job transition decision process.  In fact, an o
 substantially increase one's salary is a common impetus for a job transition. 
 In the left subplot of Figure \ref{fig:avgsal}, we plot the average 
 annual salary distribution 
-of the employer during their tenure at their original employer over our full dataset.  
+of the employee during their tenure at their original employer over our full dataset.  
 Salaries ranged from \$15,140 to \$240,000 per year.  We note that this sample 
 is slightly overweight in terms of the representation of low-wage workers 
 in comparison with national income distributions as compiled 
 by the Bureau of Labor and Statistics May 2018 National Occupational 
 Employment and Wage Estimates. In addition, 
 approximately 9\% of workers have salaries greater than \$100,000. 
-However, we note the generate shape of this distribution does indeed closely approximate 
+However, we note the general shape of this distribution does indeed closely approximate 
 that of the full workforce.
 %
 \begin{figure}[thb]
@@ -370,7 +369,7 @@ with a \$43,600 annual salary.
 
 \subsection{Industry Transition Patterns}
 
-Next, we examine how employers either choose to move to a new industry or remain
+Next, we examine how employees either choose to move to a new industry or remain
 in that of their original firm as a consequence of their job transition.  
 In Figure \ref{fig:transmat}, we display a heatmap of the percentage of 
 employees that started in an industry indicated by the lower column labels and 
@@ -528,7 +527,7 @@ version which includes additional features further described below. Initially, w
 consider simple linear and logistic regression and decision tree classifiers to establish 
 baseline results.  We then more systematically search through several dozen binary classification 
 methods to identify which have the strongest performance from an ROC curve perspective.  We find 
-that tree based models tend to be identified in this regard and discuss the top performers 
+that tree-based models tend to be identified in this regard and discuss the top performers 
 in detail below. 
 
 In all models considered below, we uniformly randomly sample our full dataset into an 80\% training set 
@@ -579,7 +578,7 @@ model is fit to our data through maximum likelihood estimation.
 \subsection{Decision Tree Classifier}  Next, we explore a variety of additional 
 binary classification models utilizing only the original employer variables described above.
 In particular, we examined quadratic discriminant based classifers, support vector classifiers, 
-and tree based methods, among a number of other techniques.  We found that decision 
+and tree-based methods, among a number of other techniques.  We found that decision 
 trees provided the strongest predictive performance relative to model complexity. 
 In particular, if we significantly increase model complexity, we can marginally outperform 
 a decision tree classifer; however, it is likely such gains may not be substantive and 
@@ -668,7 +667,7 @@ we are able to slightly improve the performance over the prior best model in the
 light gradient boosted tree.  In addition, note that the linear regression model has very similar 
 performance as on the original dataset whereas the logistic regression model degrades in performance.  
 The decision 
-tree model also improves slightly.  Both examples provide a strong indication that tree based models 
+tree model also improves slightly.  Both examples provide a strong indication that tree-based models 
 provide a good framework for the design of employee attrition classification techniques. 
 
 \section{Conclusions and Extensions} \label{consec}
@@ -682,7 +681,7 @@ aspects of this data including generating an industry job transition table, iden
 which variables had the most significant changes in distribution for employees 
 that stayed or left their current employers, and constructed ratings features 
 based on a PCA study. We then applied several binary classification models 
-to the employee attrition problem and found that tree based methods tended to 
+to the employee attrition problem and found that tree-based methods tended to 
 offer the strongest performance.  In particular, in the case of the original 
 variables specified in \cite{Smart2016}, simple decision trees offer strong 
 performance whereas one of their extensions, random forests, provided a 
@@ -691,15 +690,19 @@ two new features including our original PCA based ratings feature
 and the percentage salary increase of the job transition.  
 
 We finally describe several ideas that we plan on pursing in future work.  First, 
-we would like to construct a more extensions dataset of employee job transition data that goes
+we would like to construct a more extensive dataset of employee job transition data that goes
 well beyond the 5550 data points considered in this article.  In particular, 
-we hope to work with Glassdoor and/or LinkedIn to build a more extensive database of 
+we hope to work with Glassdoor and/or LinkedIn to build a larger collection of 
 employee job transitions and associated company ratings. In addition, we would like to 
 obtain company specific job transition information from LinkedIn which would permit 
 more detailed attrition studies at the company and industry level to further 
 the work of \cite{Bennet1993}.  Furthermore, factors such as employee 
 engagement and absence are known to have a strong connection with employee attrition 
-\cite{Kumar2015,Mitra1992}.  Lastly, we 
+\cite{Kumar2015,Mitra1992}.  In addition, it would be of interest to obtain 
+firm specific attrition data prior and after attrition prevention programs 
+were commenced.  The main aim would be to assess the effectiveness of such programs 
+and identify if the programs that yielded the strongest results exhibit 
+commonalities.  Lastly, we 
 note that if one wishes to examine the attrition problem in the greatest detail 
 possible, then one would have to partner with firms to obtain specific detailed 
 internal attrition records.  One could then develop company specific models, 
