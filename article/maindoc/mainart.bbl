@@ -1,11 +1,81 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{Jones2015}
-C.~D. Jones, A.~B. Smith, , and E.~F. Roberts, ``Book title,'' {\em Journal},
-  pp.~20--25, Date.
+\bibitem{Mir1993}
+P.~Babington, {\em Building the Competitive Workforce: Investing in Human
+  Capital for Corporate Success}.
+\newblock Wiley, 1993.
 
-\bibitem{Smith2015}
-A.~B. Smith, C.~D. Jones, and E.~F. Roberts, ``Book title,'' {\em Journal},
-  pp.~7--15, Date.
+\bibitem{Datta2009}
+D.~Datta {\em et~al.}, ``Causes and effects of employee downsizing: A review
+  and synthesis,'' {\em Journal of Management}, vol.~36, no.~1, pp.~281--348,
+  2009.
+
+\bibitem{Grip2006}
+A.~de~G. and J.~V. L., {\em The economics of skills obsolescence: A review},
+  vol.~21.
+\newblock Research in Labor Economics, 2002.
+
+\bibitem{SHAU1998}
+K.~O'Shaughnessy and D.~Flanagan, ``Determinants of layoff announcements
+  following m\&as: an empirical investigation,'' {\em Strategic Management
+  Journal}, vol.~19, no.~10, pp.~989--999, 1998.
+
+\bibitem{Singh2012}
+S.~Moninder {\em et~al.}, ``An analytics apporach for proactively combating
+  voluntary attrition of employees,'' {\em IEEE 12th International Conference
+  on Data Mining Workshops}, pp.~317--323, 2012.
+
+\bibitem{Cook1986}
+G.~R. Cook, D. S. \&~Ferris, ``Strategic human resource management and firm
+  effectiveness in industries experiencing decline,'' {\em Human Resource
+  Management}, vol.~25, no.~3, pp.~441--458, 1986.
+
+\bibitem{Free1994}
+S.~J. Freeman, ``Organizational downsizing as convergence or reorientation:
+  Implications for human resource management,'' {\em Human Resource
+  Management}, vol.~33, no.~2, pp.~213--238, 1994.
+
+\bibitem{Giac1991}
+D.~Giacalone, R. A. \&~Duhon, ``Assessing intended employee behavior in exit
+  interviews,'' {\em The Journal of Psychology}, vol.~125, no.~1, pp.~83--90,
+  1991.
+
+\bibitem{Smart2016}
+M.~Smart and A.~Chamberlain, ``Why do workers quit? the factors that predict
+  employee turnover,'' {\em Glassdoor Research Report Whitepaper}, pp.~1--19,
+  2016.
+
+\bibitem{Alao2013}
+A.~D. . A.~A. B., ``Analyzing employees attrition using decision trees,'' {\em
+  Computing Information Systema \& Development Infromatics}, vol.~4, no.~1,
+  pp.~17--28, 2013.
+
+\bibitem{Fri2018}
+J.~Frierson and D.~Si, ``Who's next: Evaluating attrition with machine learning
+  algorithms and survival analysis,'' {\em International Conference on Big
+  Data}, pp.~251--259, 2018.
+
+\bibitem{Naga}
+S.~V. . V.~R. Nagadevara, V., ``Establishing a link between employee turnover
+  and withdrawal behaviours: Application of data mining techniques,'' {\em
+  Research and Practice in Human Resource Management}, vol.~16, no.~2,
+  pp.~81--99, 2008.
+
+\bibitem{Shlens05atutorial}
+J.~Shlens, ``A tutorial on principal component analysis,'' {\em Systems
+  Neurobiology Laboratory, Salk Institute for Biological Studies}, 2005.
+
+\bibitem{Bennet1993}
+N.~Bennett {\em et~al.}, ``A firm-level analysis of employee attrition,'' {\em
+  Group \& Organization Management}, vol.~18, no.~4, pp.~1--19, 1993.
+
+\bibitem{Kumar2015}
+V.~Kumar and A.~Pansari, ``Measuring the benefits of employee engagement,''
+  {\em MITSloan Management Review}, vol.~56, no.~4, pp.~67--72, 2015.
+
+\bibitem{Mitra1992}
+A.~Mitra {\em et~al.}, ``A meta-analytic review of the relationship between
+  absence and turnover,'' {\em Journal of Applied Psychology}, vol.~77, no.~6,
+  pp.~879--889, 1992.
 
 \end{thebibliography}
