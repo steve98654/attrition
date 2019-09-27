@@ -12,6 +12,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
 \usepackage[table]{xcolor} 
+\usepackage{graphics}
+\usepackage{graphicx}
+\providecommand{\keywords}[1]{\textbf{\textit{Keywords---}} #1}
 \input{hicss51-packages.tex}
 \newcommand{\sansserifformat}[1]{\fontfamily{cmss}{ #1}}%
 
@@ -24,15 +27,28 @@
 
 \title{An Explicative and Predictive Study of Employee Attrition using Tree-based Models}
 
-\author{Nesreen El-rayes\\
-  MTSM at NJIT \\
+\author{Nesreen El-rayes \\
+  MTSM at NJIT\\
   {\underline{nde4@njit.edu}} \\\And
-  Michael Smith\\
+  Michael Smith \\
   MTSM at NJIT \\
-  {\underline{mes6@njit.edu}}\\\And 
-  Stephen Taylor\\
+  {\underline{mes6@njit.edu }}\\\And 
+  Stephen Taylor (Corr. Auth.)\\
   MTSM at NJIT \\
-  {\underline{smt@njit.edu} (Corr. Auth.)} \\}
+  {\underline{smt@njit.edu}} \\
+  }
+
+
+%\author{Nesreen El-rayes\\
+%MTSM at NJIT: nde4@njit.edu \\
+%  Michael Smith\\
+%  MTSM at NJIT: mes6@njit.edu\\ 
+%  Stephen Taylor\\
+%  smt@njit.edu (Corr. Auth.)\\
+%  MTSM at NJIT\\ 
+%  }
+%  186 Central Ave.\\ 
+%  Newark, NJ 07103}
 
 \date{}
 
@@ -51,6 +67,8 @@ We find tree-based methods including random forests and light gradient boosted t
 provide the overall strongest predictive performance.  Finally, we summarize ROC curves 
 for several such models and describe future potential research directions. 
 \end{abstract}
+
+\keywords{employee attrition, binary classification, retention strategy}
 
 \section{Introduction}
 \hspace{\parindent}
@@ -808,6 +826,12 @@ in turn can be used by human resource staff to establish an attrition prevention
 \textbf{Acknowledgements:} The authors would like to acknowledge Andrew Chamberlain, 
 Chief Economist at Glassdoor, for sharing the job transition dataset that served 
 as the data source for this study. 
+The authors would also like to acknowledge the three anonymous referees whose 
+comments greatly improved the content and language of this proceeding. 
+
+\textbf{Funding:} This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\textbf{Competing Interests:} The authors have no competing interests.
 
 % if added before the last page, this command can help balancing columns
 %\addtolength{\textheight}{-.2cm} 
