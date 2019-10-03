@@ -19,6 +19,7 @@ decflin = pd.read_csv('orig_dectree.csv')
 dflinfull = pd.read_csv('full_linear.csv')
 dflogfull = pd.read_csv('full_logistic.csv')
 decflinfull = pd.read_csv('full_dectree.csv')
+forfull = pd.read_csv('full_rand_for.csv')
 
 
 def _rocvl(df):
@@ -59,6 +60,7 @@ plt.plot(np.linspace(0,1,100),np.linspace(0,1,100),'k--')
 plt.plot(dflinfull.iloc[:,1],dflinfull.iloc[:,2],label='Linear')
 plt.plot(dflogfull.iloc[:,1],dflogfull.iloc[:,2],label='Logistic')
 plt.plot(decflinfull.iloc[:,1],decflinfull.iloc[:,2],label='Dec. Tree')
+plt.plot(forfull.iloc[:,0],forfull.iloc[:,1],label='Random Forest')
 plt.plot(f1full,f2full,label='Light GBT') 
 plt.title('Full Feature ROC Curves')
 plt.axis('equal')
