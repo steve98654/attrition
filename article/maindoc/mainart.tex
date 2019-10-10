@@ -75,7 +75,7 @@ The compounding effect of the employee attrition feedback loop on overall firm
 success or failure provides, in our view, the essential motive to 
 investigate the issue. 
 
-Traditionally, employee attrition and retention issues tend to be examined by qualitative and anecdotal 
+Traditionally, employee attrition and retention related questions tend to be examined by qualitative and anecdotal 
 measures.  Specifically, human resources staff typically conduct exit interviews after an employee provides 
 a resignation notice in order to ascertain the motivations behind the decision to leave \cite{Giac1991}.  Although 
 these conversations may be direct and candid, i.e. in the event an employee is leaving for a significantly 
@@ -106,7 +106,7 @@ examine employee
 attrition and retention issues based upon 
 a collection of approximately five thousand anonymously submitted resumes to Glassdoor.  
 Specifically, we examine industry job transition patterns, dependencies between company ratings 
-provided on the Glassdoor website, and distribution related aspects of these variables 
+provided on the Glassdoor website, and distributional related aspects of the variables 
 contained in this dataset.  We further consider how to apply modern binary classification 
 methods to predict the likelihood of employee attrition.  In particular, we examine the 
 performance of the linear model considered in \cite{Smart2016} against logistic regression, 
@@ -138,7 +138,7 @@ employee resumes that will form the basis for subsequent attrition studies.
 Next, we provide a variety of summary statistics of this information that 
 are relevant for the design of predictive models.  Then we discuss 
 our data normalization process and 
-features constructed from this original data which will be utilized 
+features constructed from this original data which are utilized 
 as inputs into these models.
 
 \subsection{Data Source Description}\label{datdes}
@@ -191,7 +191,7 @@ to being input into the predictive models.
 
 Of the 5550 total employee job transitions in this dataset, 
 a total of 1429 employees remained at their present firm whereas a majority of 4121 
-transitioned to a new firm.  This confirms a claim \cite{Smart2016} indicating 
+transitioned to a new firm.  This confirms information provided in \cite{Smart2016} indicating 
 that approximately three quarters of employees leave their employer during a job 
 transition.  We now graphically summarize several distributional aspects of 
 attributes associated with these transitions.
@@ -396,7 +396,7 @@ due to the skill requirement prevalence of IT positions across all these industr
 Finally, we note that the retail industry is the most popular industry to transition 
 into overall from a different original industry.
 
-\subsection{Attrition Identification Variable Importance}
+\subsection{Attrition Variable Importance Identification}
 
 Now, we separate the job transition  dataset into a retention subset 
 where employees remained with their current employer, and an attrition set for those who 
@@ -431,7 +431,7 @@ It is natural to allows one's overall view on the firm influence
 the manner in which ratings are assigned for each of these
 categories, i.e. they are not necessarily independent.  We will 
 conduct a principal component analysis on a quantile normalized 
-version the full original ratings dataset of nine categories in 
+version of the full original ratings dataset of nine categories in 
 order to ascertain the effective dimensionality of this information. 
 
 Specifically, let $r_i^j$ for $i=1,\ldots,n=5550$ and $j=1,\ldots,9$ denote 
@@ -507,8 +507,8 @@ Note that these plots exhibit several interesting features.  First, if an employ
 their original firm a high rating and the original firm year was founded prior to 
 say 1900, then a substantial majority of such employees remained at their original 
 firm.  In addition, since most firms with founding years in this range are municipalities, 
-this suggest government employees who are happy with their current firm are highly inclined 
-to remain at that firm.  In addition, note that overall ratings range varies as a function 
+this suggests government employees who are happy with their current firm are highly inclined 
+to remain at that firm.  In addition, note that the overall ratings range varies as a function 
 of the original firm founding year.  In particular, ratings generally fall within 
 a [2.5,4.0] interval until approximately near a founding year of 1950 where they further 
 widen to the greatest range for newer firms founded past 2000.  Note the majority of 
@@ -521,21 +521,21 @@ lower overall ratings result in higher frequencies of employee attrition than hi
 We now focus on extending beyond the prior exploratory data analysis and systematically construct 
 a series of increasingly complex but more accurate 
 models to predict whether an employee will remain with their original employer or 
-leave for another firm during a job transition.  We consider two datasets below first 
+leave for another firm during a job transition.  We consider two datasets below 
 consisting of the original variables considered in \cite{Smart2016} and then an extended 
-version which includes additional features further described below. Initially, we 
-consider simple linear and logistic regression and decision tree classifiers to establish 
+version which includes additional features. Initially, we 
+consider simple linear and logistic regression as well as decision tree classifiers to establish 
 baseline results.  We then more systematically search through several dozen binary classification 
 methods to identify which have the strongest performance from an ROC curve perspective.  We find 
 that tree-based models tend to be identified in this regard and discuss the top performers 
-in detail below. 
+in detail. 
 
-In all models considered below, we uniformly randomly sample our full dataset into an 80\% training set 
+In all models considered, we uniformly randomly sample our full dataset into an 80\% training set 
 and 20\% test set.  All models are trained using 5-fold cross validation on the training set and all performance 
-results are based solely on a single evaluation of each model on the hold out test set.  
+results are based solely on a single evaluation of each model on the hold-out test set.  
 
 \subsection{Linear Review}
-First, we recall that in \cite{Smart2016} where the authors fit a linear model 
+First, we recall that in \cite{Smart2016} the authors fit a linear model 
 %
 \begin{equation} 
     y = \beta^Tx + \epsilon, 
@@ -564,16 +564,16 @@ binary classifers considered below.
 
 \subsection{Logistic Regression} We next extend to a logistic regression model with the 
 same variables as the linear model which 
-is more suitable for probability prediction and more specifically binary classification 
-applications.   In particular, we fit the model 
+is more suitable for probability prediction and in particular, binary classification 
+applications.   Specifically, we fit the model 
 %
 \begin{equation}
-    y = (1+\exp(-\beta^Tx))^{-1}.
+    y = (1+\exp(-\beta^Tx))^{-1},
 \end{equation}
 % 
 where here again the target $y$ represents the probability of leaving the firm. 
-Note know that $y\in[0,1]$ which are appropriate bounds for a probability.  This 
-model is fit to our data through maximum likelihood estimation. 
+Note now that $y\in[0,1]$ which are appropriate bounds for a probability.  This 
+model is fit to data through maximum likelihood estimation. 
 
 \subsection{Decision Tree Classifier}  Next, we explore a variety of additional 
 binary classification models utilizing only the original employer variables described above.
@@ -589,9 +589,9 @@ When constructing decision tree models, we explored trees with depths from 2 to 
 found that depth 5 trees has the strongest overall performance from an area under their 
 associated ROC curves point of view. 
 A decision tree is fit to the attrition data by using a greedy technique of 
-iteratively determining which feature and threshold minimizes performance error 
+iteratively determining which feature and threshold minimizes prediction error 
 at each level of the tree.  This method is iteratively applied until we arrive 
-at a level 5 depth tree, and then branches that only marginally contribute 
+at a level 5 depth tree, and then branches that only marginally contribute to
 the ROC curve performance are pruned.  
 
 \subsection{Utilizing the Full Feature Set} 
