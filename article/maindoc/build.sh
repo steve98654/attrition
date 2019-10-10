@@ -1,1 +1,1 @@
-pdflatex --shell-escape mainart.tex && evince mainart.pdf
+pdflatex --shell-escape mainart_rev.tex && evince mainart_rev.pdf
